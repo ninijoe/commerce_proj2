@@ -1,0 +1,57 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2 class="text-center">Create New Listings</h2>
+
+
+    <style>
+        form {
+          width: 400px;
+          margin: 0 auto;
+        }
+
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+
+        input, textarea {
+          width: 100%;
+          padding: 0.5rem;
+          margin-bottom: 1rem;
+        }
+
+        button {
+          background-color: #0099ff;
+          color: white;
+          padding: 0.5rem 1rem;
+          border: none;
+          border-radius: 5px;
+        }
+
+        div {
+          display: flex;
+          flex-direction: column;
+          margin: 10px 0;
+        }
+
+        label {
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+
+        select {
+          padding: 5px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+        }
+    </style>
+
+
+  <form method="post" action="{% url 'create_listing' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        <input type="submit" value="Create Listing" />
+  </form>
+{% endblock %}

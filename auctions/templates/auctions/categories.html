@@ -1,0 +1,86 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<style media="screen">
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .card {
+      border: 1px solid #ccc;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+  }
+
+h2.text-center {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #212529;
+        margin-bottom: 1rem;
+}
+
+.category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #f2f2f2;
+  text-decoration: none;
+  text-decoration-line: none;
+}
+
+.category-name span{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+.category:hover {
+    background-color: #ccc;
+    color: #fff;
+    .category:hover {
+    background-color: #ccc;
+    color: #fff;
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+
+
+
+</style>
+{%csrf_token%}
+{% if user.is_authenticated %}
+<h2 class="text-center">Categories</h2>
+
+<div>
+    {%csrf_token%}
+    {% for category in categories %}
+    <div class="row mx-3">
+      <div class="card mx-3" style="width: 10rem; height: 3rem;">
+        <a href="{% url 'category_listings' category.id %}">
+          <div class="category">
+
+                <span class="category-name">
+                  {{category.categoryName}}
+                </span>
+
+          </div>
+        </a>
+       </div>
+      </div>
+    {% endfor %}
+
+</div>
+
+{% else %}
+<h2 class="text-center">Please log in to view active listings.</h2>
+{% endif %}
+{% endblock %}
