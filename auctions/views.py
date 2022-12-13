@@ -14,7 +14,6 @@ from .models import User, Category, AuctionListing, AuctionListingForm
 
 def index(request):
     listings = AuctionListing.objects.filter(isActive=True)
-    categories = Category.objects.all()
     return render(request, 'auctions/index.html', {'listings': listings, 'categories': categories})
 
 
@@ -24,6 +23,34 @@ def index(request):
 def categories(request):
     categories = Category.objects.all()
     return render(request, 'auctions/categories.html', {'categories': categories})
+
+
+
+
+
+def listing(request, listing_id):
+    return
+
+
+
+
+
+def create_listing(request):
+    #Checks if the request method is a POST request
+    if request.method == 'POST':
+        #Creates an AuctionListingForm object with the POST data
+        form = AuctionListingForm(request.POST)
+        #Checks if the form is valid
+        if form.is_valid():
+            #Sets the user of the listing to the current user
+            listing = form.save(commit=False)
+            listing.owner = request.user
+            listing.save()
+            return HttpResponseRedirect(reverse("index"))
+    else:
+        #If the request method is not a POST request, creates an empty AuctionListingForm object
+        form = AuctionListingForm()
+    return render(request, 'auctions/create_listing.html', {'form': form})
 
 
 
@@ -104,25 +131,3 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html", {'csrf_token': csrf.get_token(request)})
-
-
-
-
-
-
-def create_listing(request):
-    #Checks if the request method is a POST request
-    if request.method == 'POST':
-        #Creates an AuctionListingForm object with the POST data
-        form = AuctionListingForm(request.POST)
-        #Checks if the form is valid
-        if form.is_valid():
-            #Sets the user of the listing to the current user
-            listing = form.save(commit=False)
-            listing.owner = request.user
-            listing.save()
-            return HttpResponseRedirect(reverse("index"))
-    else:
-        #If the request method is not a POST request, creates an empty AuctionListingForm object
-        form = AuctionListingForm()
-    return render(request, 'auctions/create_listing.html', {'form': form})

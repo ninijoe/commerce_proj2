@@ -16,10 +16,35 @@
       {%csrf_token%}
     <style>
 
+    body {
+
+      background: linear-gradient(to left, #000000, #111111, #222222, #333333, #444444, #555555);
+    }
+
+    strong {
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #009933;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 0.5em 0;
+      font-style: italic;
+      line-height: 1.5em;
+      text-shadow: 1px 1px 1px #000;
+      }
+
+
+
       h1 {
           color: #1DB954;
           font-family: 'Roboto', sans-serif;
           font-size: 2.5rem;
+          font-weight: bold;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          margin: 0.5em 0;
+          line-height: 1.5em;
+          text-shadow: 1px 1px 1px #000;
       }
 
       .nav {
@@ -52,13 +77,10 @@
         list-style-type: none;
         margin: 0;
         padding: 0;
-        overflow: hidden;
+        justify-content: center;
         background-color: #333;
     }
 
-    .nav li {
-        float: left;
-    }
 
     .nav li a {
         display: block;
@@ -66,48 +88,64 @@
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
+        justify-content: center;
+
     }
 
     .nav li a:hover {
         background-color: #111;
+
     }
+
+    .logo img {
+      width: 6%;
+      height: auto;
+    }
+
+
+}
+
+
     </style>
     {%csrf_token%}
-      {% if user.is_authenticated %}
-          Signed in as <strong>{{ user.username }}</strong>.
-      {% else %}
-          Not signed in.
-      {% endif %}
-        <h1 style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.5em; font-weight: bold; text-align: center; padding: 10px; background-color: green; border-radius: 5px;">Auction Site</h1>
 
-        <div class= "container">
+<div class="logo">
+  <img src="https://raw.githubusercontent.com/ninijoe/wolfe/main/images/anotherwolfe.png" alt="logo">
+  welcome, <strong>{{ user.username }}</strong>
+</div>
 
-        </div>
-        <ul class="nav">
+{% if user.is_authenticated %}
+
+    <h1 style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.8em; font-weight: bold; text-align: center; padding: 10px; background-color: green; border-radius: 5px;">Auction channel</h1>
+    <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
             </li>
-            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'categories' %}">Categories</a>
+            </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'create_listing' %}">Create New Listing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'categories' %}">Categories</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
-                </li>
-            {% endif %}
-        </ul>
-        <hr>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'create_listing' %}">Create New Listing</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'categories' %}">Watchlist</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Log In</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+        {% endif %}
+    </ul>
+    <hr>
+
         {% block body %}
         {% endblock %}
     </body>

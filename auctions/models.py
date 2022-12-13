@@ -24,9 +24,8 @@ class AuctionListing(models.Model):
     imageUrl = models.CharField(max_length=1000)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     isActive= models.BooleanField(default=True)
-    owner= models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name="category")
-    category= models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, related_name="user")
-    seller = models.ForeignKey(User, on_delete=models.CASCADE)
+    category= models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, related_name="category")
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name="seller")
 
     def __str__(self):
         return self.title
@@ -40,8 +39,7 @@ class AuctionListing(models.Model):
     def get_listing_isActive(self):
         return self.isActive
 
-    def get_listing_owner(self):
-        return self.owner
+
 
     def get_listing_category(self):
         return self.category
@@ -53,7 +51,7 @@ class AuctionListing(models.Model):
 class AuctionListingForm(forms.ModelForm):
     class Meta:
         model = AuctionListing
-        fields = ['title', 'description', 'imageUrl', 'price', 'isActive', 'owner', 'category', 'seller']
+        fields = ['title', 'description', 'imageUrl', 'price', 'isActive', 'category', 'seller']
 
 # Model 2: Bids
 class Bid(models.Model):

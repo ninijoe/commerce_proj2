@@ -4,9 +4,10 @@
 <style media="screen">
 
 h2.text-center {
+
           font-size: 2rem;
           font-weight: bold;
-          color: #212529;
+          color: white;
           margin-bottom: 1rem;
 }
 
@@ -62,7 +63,7 @@ h2.text-center {
         margin-bottom: 1rem;
     }
 
-    select {
+select {
         width: 100%;
         padding: 0.5rem;
         font-size: 1.2rem;
@@ -70,27 +71,47 @@ h2.text-center {
         border: 1px solid #ced4da;
         margin-bottom: 1rem;
     }
+
+    input[type="submit"][name="listing"] {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+
+
+
 </style>
 
 {%csrf_token%}
 {% if user.is_authenticated %}
 
-<h2 class="text-center"> All Listings</h2>
+<h2 class="text-center" style="color: white;"> All Active Listings</h2>
 
-<div class="row mx-3">
+<div class="row mx-3" >
 {%for listing in listings %}
-<div class="card mx-3" style="width: 10rem; height: 15rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
+<div class="card mx-3" style="width: 10rem; height: 25rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
 
-  <div class="card-body">
-    {%csrf_token%}
-    <img class= "card-img-top" src="{{listing.imageUrl}}" alt="{{listing.title}}" style="width:100%; height:auto;">
-    <h5 class="card-title" style="font-weight:bold; font-size:1.5rem;">{{listing.title}}</h5>
-    <p class="card-text" style="font-size:0.8rem;">{{listing.description}}</p>
-    <a href="#" class="btn btn-primary" style="background-color:#0099FF; color:#FFFFFF;">more</a>
-  </div>
+  <form class="listing" action="" method="get">
+    <div class="card-body" style="text-align: center;">
+      {%csrf_token%}
+      <img class= "card-img-top" src="{{listing.imageUrl}}" alt="imageurl" style="width:140px; height:200px; border-radius: 10px; margin: 0 auto;">
+      <h5 class="card-title" style="font-weight:bold; font-size:1.5rem;">{{listing.title}}</h5>
+      <p class="card-text" style="font-size:0.8rem;">{{listing.description}}</p>
+      <p class="card-text" style="font-size:1.0rem; color: black;">${{listing.price}}</p>
+      <input type="submit" name="listing" value="more">
+    </div>
+  </form>
+
 </div>
 {% endfor %}
 </div>
+
+
 {% else %}
 <h2 class="text-center">Please log in to view active listings.</h2>
 {% endif %}
