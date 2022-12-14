@@ -101,31 +101,20 @@ select {
 {%csrf_token%}
 {% if user.is_authenticated %}
 
-<h2 class="text-center" style="color: white;"> All Active Listings</h2>
+<h2 class="text-center" style="color: white;"> {{title}}</h2>
 <br>
-<div class="row mx-5" >
-{%for listing in listings %}
-<div class="card mx-3" style="width: 10rem; height: 25rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s; background-color: black;">
 
-  <form class="listing" action="{% url 'listing' listing.id %}" method="get">
-    <div class="card-body" style="text-align: center; position: relative;">
-      {%csrf_token%}
-      <img class= "card-img-top" src="{{listing.imageUrl}}" alt="imageurl" style="width:130px; height:175px; border-radius: 10px; margin: 0 auto;">
-      <h5 class="card-title" style="font-weight:bold; color:white; font-size:1.5rem;">{{listing.title}}</h5>
-      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#description" style="width: 50px; height: 40px;">
-        <span class="collapse-icon">˯</span>
-      </button>
-      <div id="description" class="collapse">
-        <p class="card-text" style="font-size:0.8rem;color:grey;">{{listing.description}}</p>
-        <p class="card-text" style="font-size:1.0rem; color:white;">${{listing.startingBid}}</p>
-        <input type="submit" name="listing" value="more">
-      </div>
-    </div>
-  </form>
+<div class="card-body" style="text-align: center; position: relative;">
+  {%csrf_token%}
+  <img class= "card-img-top" src="{{imageUrl}}" alt="imageurl" style="width:260px; height:335px; border-radius: 10px; margin: 0 auto; margin-top: -40px;">
 
 </div>
-{% endfor %}
-</div>
+<p class="" style="font-size:1.0rem;color:white; font-weight:bold;">{{description}}</p>
+<p class="text-center"style="font-size:1.8rem; color:lightblue; font-weight:bold;">${{startingBid}}</p>
+<p class="" style="font-size:1.0rem;color:${isActive ? 'green' : 'red'}; font-style:italic;">ACTIVE:{{isActive}}</p>
+<p class=""style="font-size:1.0rem; color:grey; font-style:italic;">CATEGORY: {{category}}</p>
+<p class=""style="font-size:1.0rem; color:white; font-style:italic;">SELLER: {{seller}}</p>
+
 
 
 {% else %}

@@ -24,11 +24,10 @@
     strong {
       font-weight: bold;
       font-size: 1.2em;
-      color: #009933;
+      color: white;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       margin: 0.5em 0;
-      font-style: italic;
       line-height: 1.5em;
       text-shadow: 1px 1px 1px #000;
       }
@@ -99,24 +98,28 @@
 
     .logo img {
       width: 6%;
+      max-width: 100%;
       height: auto;
     }
 
-
-}
-
+    .logo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
 
     </style>
     {%csrf_token%}
 
-<div class="logo">
-  <img src="https://raw.githubusercontent.com/ninijoe/wolfe/main/images/anotherwolfe.png" alt="logo">
-  welcome, <strong>{{ user.username }}</strong>
-</div>
+
 
 {% if user.is_authenticated %}
-
-    <h1 style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.8em; font-weight: bold; text-align: center; padding: 10px; background-color: green; border-radius: 5px;">Auction channel</h1>
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/ninijoe/wolfe/main/images/anotherwolfe.png" alt="logo">
+      <strong> welcome {{ user.username }}</strong>
+    </div>
+    <h1 style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.8em; font-weight: bold; text-align: center; padding: 10px; background-color: red; border-radius: 5px;">Auction channel</h1>
     <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'index' %}">Active Listings</a>

@@ -29,9 +29,17 @@ def categories(request):
 
 
 def listing(request, listing_id):
-    return
-
-
+    listing = AuctionListing.objects.get(pk=listing_id)
+    context = {
+        'title': listing.get_listing_title(),
+        'description': listing.get_listing_description(),
+        'imageUrl': listing.get_listing_image(),
+        'startingBid': listing.get_listing_startingBid(),
+        'isActive': listing.get_listing_isActive(),
+        'category': listing.get_listing_category(),
+        'seller': listing.get_listing_seller()
+    }
+    return render(request, 'auctions/listing.html', context)
 
 
 
