@@ -6,6 +6,12 @@ from django import forms
 class User(AbstractUser):
     pass
 
+
+
+
+
+
+
 class Category(models.Model):
     categoryName = models.CharField(max_length=50)
 
@@ -15,6 +21,10 @@ class Category(models.Model):
 
     def get_auction_listings(self):
         return AuctionListing.objects.filter(category=self)
+
+
+
+
 
 
 # Model 1: Auction Listings
@@ -53,10 +63,22 @@ class AuctionListing(models.Model):
         return self.seller
 
 
+
+
+
+
+
+
 class AuctionListingForm(forms.ModelForm):
     class Meta:
         model = AuctionListing
         fields = ['title', 'description', 'imageUrl', 'startingBid', 'isActive', 'category', 'seller']
+
+
+
+
+
+
 
 # Model 2: Bids
 class Bid(models.Model):
@@ -64,6 +86,10 @@ class Bid(models.Model):
     bidder = models.ForeignKey(User, on_delete=models.CASCADE)
     bid_amount = models.DecimalField(max_digits=10, decimal_places=2)
     bid_date = models.DateTimeField()
+
+
+
+
 
 
 

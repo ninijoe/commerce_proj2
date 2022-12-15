@@ -16,6 +16,7 @@
       {%csrf_token%}
     <style>
 
+
     body {
 
       background: linear-gradient(to left, #000000, #111111, #222222, #333333, #444444, #555555);
@@ -30,6 +31,7 @@
       margin: 0.5em 0;
       line-height: 1.5em;
       text-shadow: 1px 1px 1px #000;
+      margin-right: 20px;
       }
 
 
@@ -44,6 +46,7 @@
           margin: 0.5em 0;
           line-height: 1.5em;
           text-shadow: 1px 1px 1px #000;
+          margin-top: 45px;
       }
 
       .nav {
@@ -52,6 +55,7 @@
           padding: 0;
           overflow: hidden;
           background-color: #333;
+
       }
 
       .nav-item {
@@ -78,6 +82,8 @@
         padding: 0;
         justify-content: center;
         background-color: #333;
+        display: flex;
+        flex-wrap: nowrap;
     }
 
 
@@ -88,7 +94,8 @@
         padding: 14px 16px;
         text-decoration: none;
         justify-content: center;
-
+        flex: 0 0 auto;
+        font-size: 1rem;
     }
 
     .nav li a:hover {
@@ -100,6 +107,7 @@
       width: 6%;
       max-width: 100%;
       height: auto;
+      margin-left: 20px;
     }
 
     .logo {
@@ -107,7 +115,13 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
+      position: relative;
+      top: 0;
+      left: 0;
+
     }
+
+
 
     </style>
     {%csrf_token%}
@@ -115,39 +129,46 @@
 
 
 {% if user.is_authenticated %}
-    <div class="logo">
-      <img src="https://raw.githubusercontent.com/ninijoe/wolfe/main/images/anotherwolfe.png" alt="logo">
-      <strong> welcome {{ user.username }}</strong>
-    </div>
-    <h1 style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.8em; font-weight: bold; text-align: center; padding: 10px; background-color: red; border-radius: 5px;">Auction channel</h1>
-    <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'categories' %}">Categories</a>
-            </li>
+        <div class="body">
+          <div class="logo">
+            <img src="https://raw.githubusercontent.com/ninijoe/wolfe/main/images/anotherwolfe.png" alt="logo">
+            <strong> welcome {{ user.username }}</strong>
+          </div>
+          <h1 style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.8em; font-weight: bold; text-align: center; padding: 10px; background-color: red; border-radius: 5px;">auctionbox</h1>
+          <ul class="nav">
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'categories' %}">Categories</a>
+                  </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'create_listing' %}">Create New Listing</a>
-            </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'create_listing' %}">Create New Listing</a>
+                  </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'categories' %}">Watchlist</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-            </li>
-        {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Log In</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Register</a>
-            </li>
-        {% endif %}
-    </ul>
-    <hr>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'categories' %}">Watchlist</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                  </li>
+              {% else %}
+                  <div class="logo">
+                    <img src="https://raw.githubusercontent.com/ninijoe/wolfe/main/images/anotherwolfe.png" alt="logo">
+                  </div>
+                  <h1 style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.8em; font-weight: bold; text-align: center; padding: 10px; background-color: red; border-radius: 5px;">auctionbox</h1>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'register' %}">Register</a>
+                  </li>
+              {% endif %}
+          </ul>
+          <hr>
+
+        </div>
 
         {% block body %}
         {% endblock %}

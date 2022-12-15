@@ -2,12 +2,13 @@
 
 {% block body %}
 
-    
 
+    {% csrf_token %}
     {% if message %}
         <div>{{ message }}</div>
     {% endif %}
 
+    {% csrf_token %}
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">

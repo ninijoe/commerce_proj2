@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.shortcuts import redirect
 from django.middleware import csrf
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from .models import User, Category, AuctionListing, AuctionListingForm
 
@@ -14,7 +15,7 @@ from .models import User, Category, AuctionListing, AuctionListingForm
 
 def index(request):
     listings = AuctionListing.objects.filter(isActive=True)
-    return render(request, 'auctions/index.html', {'listings': listings, 'categories': categories})
+    return render(request, 'auctions/index.html', {'listings': listings})
 
 
 
@@ -73,6 +74,16 @@ def category_listings(request, category_id):
 
 
 
+@login_required(login_url='login')
+def add_to_watchlist(request , listing_id):
+    listing = AuctionListing.objects.get(id=listing_id)
+    watchlist, created = Watchlist.objects.get_or_create(user=request.user, listing=listing)
+    if created:
+        watchlist.save()
+        return redirect('listing', listing_id=listing_id)
+    else:
+
+     return redirect('add_to_watchlist', listing_id=listing_id)
 
 
 
@@ -90,6 +101,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
+
         else:
             return render(request, "auctions/login.html", {
                 "message": "Invalid username and/or password."
