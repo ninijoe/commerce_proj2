@@ -75,16 +75,12 @@ def category_listings(request, category_id):
 
 
 @login_required(login_url='login')
-def add_to_watchlist(request , listing_id):
-    listing = AuctionListing.objects.get(id=listing_id)
-    watchlist, created = Watchlist.objects.get_or_create(user=request.user, listing=listing)
-    if created:
-        watchlist.save()
-        return redirect('listing', listing_id=listing_id)
+def add_to_watchlist(request):
+
+    if request.method == "POST":
+        return render(request, 'auctions/add_to_watchlist.html')
     else:
-
-     return redirect('add_to_watchlist', listing_id=listing_id)
-
+        return
 
 
 

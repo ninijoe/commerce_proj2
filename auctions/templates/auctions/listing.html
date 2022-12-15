@@ -112,7 +112,7 @@ h2.text-center {
   <img class= "card-img-top" src="{{imageUrl}}" alt="imageurl" style="width:260px; height:335px; border-radius: 10px; margin: 0 auto; margin-top: -20px; float: left; margin-left:-10px;">
 
   <div class="activity-AbstractUser">
-    
+
     <p class="" style="font-size:1.0rem;color:green; font-style:bold;"><strong>ACTIVE:</strong>{{isActive}} </p>
     <p class=""style="font-size:1.0rem; color:white; font-style:bold;"><strong>CATEGORY:</strong>{{category}}</p>
     <p class=""style="font-size:1.0rem; color:white; font-style:bold;"><strong>SELLER:</strong>{{seller}}</p>
@@ -129,7 +129,8 @@ h2.text-center {
   <div class="row" style="margin-left: 0px; margin-right: 0px;">
     <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
       <form action="{% url 'add_to_watchlist' %}" method="post">
-        {%csrf_token%}
+        {% csrf_token %}
+        {{ form.as_p }}
         <input type="submit" value="add to watchlist" style="width: 100%; padding: 10px; font-size: 1.2rem; border-radius: 5px; background-color: lightblue; color: black;">
       </form>
 
