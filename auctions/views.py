@@ -31,6 +31,7 @@ def categories(request):
 
 def listing(request, listing_id):
     listing = AuctionListing.objects.get(pk=listing_id)
+    isListingInWatchlist = False
     context = {
         'title': listing.get_listing_title(),
         'description': listing.get_listing_description(),
@@ -38,9 +39,27 @@ def listing(request, listing_id):
         'startingBid': listing.get_listing_startingBid(),
         'isActive': listing.get_listing_isActive(),
         'category': listing.get_listing_category(),
-        'seller': listing.get_listing_seller()
+        'seller': listing.get_listing_seller(),
+        'isListingInWatchlist': isListingInWatchlist
     }
     return render(request, 'auctions/listing.html', context)
+
+
+
+
+
+
+@login_required(login_url='login')
+def watchlist(request):
+
+    return render(request, 'auctions/watchlist.html')
+
+
+
+
+
+
+
 
 
 
@@ -53,7 +72,7 @@ def create_listing(request):
         if form.is_valid():
             #Sets the user of the listing to the current user
             listing = form.save(commit=False)
-            listing.owner = request.user
+            listing.seller = request.user
             listing.save()
             return HttpResponseRedirect(reverse("index"))
     else:
@@ -74,20 +93,29 @@ def category_listings(request, category_id):
 
 
 
+
+
+
+
+
 @login_required(login_url='login')
 def add_to_watchlist(request):
+    return
 
-    if request.method == "POST":
-        return render(request, 'auctions/add_to_watchlist.html')
-    else:
-        return
+
+
+
+
+@login_required(login_url='login')
+def remove_from_watchlist(request ):
+    return
+
+
 
 
 
 def login_view(request):
     if request.method == "POST":
-
-
         # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
