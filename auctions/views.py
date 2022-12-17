@@ -133,6 +133,7 @@ def remove_from_watchlist(request , listing_id ):
 
 
 def login_view(request):
+
     if request.method == "POST":
         # Attempt to sign user in
         username = request.POST["username"]
@@ -149,6 +150,7 @@ def login_view(request):
                 "message": "Invalid username and/or password."
             })
     else:
+
         return render(request, "auctions/login.html", {'csrf_token': csrf.get_token(request)})
 
 

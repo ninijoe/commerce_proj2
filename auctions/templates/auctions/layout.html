@@ -151,6 +151,7 @@
                       <a class="nav-link" href="{% url 'watchlist' %}">Watchlist</a>
                   </li>
                   <li class="nav-item">
+                      {%csrf_token%}
                       <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                   </li>
               {% else %}
@@ -158,9 +159,11 @@
                     <img src="https://raw.githubusercontent.com/ninijoe/wolfe/main/images/anotherwolfe.png" alt="logo">
                   </div>
                   <h1 style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.8em; font-weight: bold; text-align: center; padding: 10px; background-color: red; border-radius: 5px;">auctionbox</h1>
+
                   <li class="nav-item">
                       <a class="nav-link" href="{% url 'login' %}">Log In</a>
                   </li>
+
                   <li class="nav-item">
                       <a class="nav-link" href="{% url 'register' %}">Register</a>
                   </li>
