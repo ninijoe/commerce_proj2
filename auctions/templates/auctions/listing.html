@@ -131,27 +131,29 @@ h2.text-center {
   <div class="row" style="margin-left: 0px; margin-right: 0px;">
     <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
 
-      <div class="row">
 
 
+            <div class="row">
               <form action="{% url 'add_to_watchlist' %}" method="POST">
                 {% csrf_token %}
+                <input type="hidden" name="listing_id" value="{{listing.id}}">
                 <button type="submit" class="btn" name="button" style="width: 100%; padding: 10px; font-size: 1.2rem; border-radius: 5px; background-color: lightblue; color: black;"> add to watchlist</button>
                 <br><br>
-                <div class="row">
-                  <form action="" method="POST" style="margin-top: 10px;">
-                    {%csrf_token%}
-                    <input type="hidden" name="listing_id" value="{{listing.id}}">
-                    <input type="text" name="bid" placeholder="Enter your bid" style="width: 100%; padding: 10px; font-size: 1.2rem; border-radius: 5px;">
-                    <button type="submit" class="btn btn-success" name="button" style="width: 100%; padding: 10px; font-size: 1.2rem; border-radius: 5px; background-color: lightblue; color: black;">Bid</button>
-                  </form>
-                </div>
               </form>
+            </div>
+
+              <div class="row">
+                <form action="" method="POST" style="margin-top: 10px;">
+                  {%csrf_token%}
+                  <input type="hidden" name="listing_id" value="{{listing.id}}">
+                  <input type="text" name="bid" placeholder="Enter your bid" style="width: 100%; padding: 10px; font-size: 1.2rem; border-radius: 5px;">
+                  <button type="submit" class="btn btn-success" name="button" style="width: 100%; padding: 10px; font-size: 1.2rem; border-radius: 5px; background-color: lightblue; color: black;">Bid</button>
+                </form>
+              </div>
 
 
 
 
-      </div>
 
 
 

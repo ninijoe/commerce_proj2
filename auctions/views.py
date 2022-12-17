@@ -100,9 +100,28 @@ def category_listings(request, category_id):
 
 @login_required(login_url='login')
 def add_to_watchlist(request):
-    return
+    if request.method == 'POST':
+        listing_id = request.POST.get('listing_id')
+        user = request.user
 
+        try:
+            listing = AuctionListing.objects.get(id=listing_id)
 
+            # check if the listing is already in the watchlist
+            if Watchlist.objects.filter(user=user, listing=listing).exists():
+                context = {
+                    'message': 'listing exist in watchlist already'
+                }
+                return render(request, 'auctions/watchlist.html', context)
+            else:
+                watchlist, created = Watchlist.objects.create(user=user, listing=listing)
+                context = {
+                    'message': 'listing added successfully',
+                    'watchlist': watchlist
+                }
+                return render(request, 'auctions/watchlist.html', context)
+        except ValueError:
+            return redirect('watchlist')
 
 
 
