@@ -8,7 +8,7 @@ from django.middleware import csrf
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-from .models import User, Category, AuctionListing, AuctionListingForm
+from .models import User, Category, AuctionListing, AuctionListingForm, WatchList
 
 
 
@@ -31,7 +31,6 @@ def categories(request):
 
 def listing(request, listing_id):
     listing = AuctionListing.objects.get(pk=listing_id)
-    isListingInWatchlist = False
     context = {
         'title': listing.get_listing_title(),
         'description': listing.get_listing_description(),
@@ -40,7 +39,7 @@ def listing(request, listing_id):
         'isActive': listing.get_listing_isActive(),
         'category': listing.get_listing_category(),
         'seller': listing.get_listing_seller(),
-        'isListingInWatchlist': isListingInWatchlist
+
     }
     return render(request, 'auctions/listing.html', context)
 
@@ -51,8 +50,9 @@ def listing(request, listing_id):
 
 @login_required(login_url='login')
 def watchlist(request):
-
-    return render(request, 'auctions/watchlist.html')
+    listing = AuctionListing.objects.filter(watchers= request.user)
+    watchlist= WatchList.objects.filter(user= request.user)
+    return render(request, 'auctions/watchlist.html', {'watchlist': watchlist, 'listing': listing})
 
 
 

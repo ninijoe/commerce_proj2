@@ -36,8 +36,7 @@ class AuctionListing(models.Model):
     isActive= models.BooleanField(default=True)
     category= models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, related_name="category")
     seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name="seller")
-    watchlist = models.ManyToManyField(User, blank= True, related_name= "listingWatchlist")
-
+    watchers= models.ManyToManyField(User, blank=True, related_name="watched_listing")
 
     def __str__(self):
         return self.title
@@ -75,6 +74,12 @@ class AuctionListingForm(forms.ModelForm):
         fields = ['title', 'description', 'imageUrl', 'startingBid', 'isActive', 'category', 'seller']
 
 
+class WatchList(models.Model):
+    auction_listing= models.ManyToManyField(AuctionListing, blank=True, related_name="watchlist")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
+
+    def __str__(self):
+        return f"{self.user}'s watchlist"
 
 
 
