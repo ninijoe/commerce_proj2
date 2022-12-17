@@ -10,8 +10,6 @@ class User(AbstractUser):
 
 
 
-
-
 class Category(models.Model):
     categoryName = models.CharField(max_length=50)
 
@@ -35,8 +33,7 @@ class AuctionListing(models.Model):
     startingBid = models.DecimalField(max_digits=10, decimal_places=2)
     isActive= models.BooleanField(default=True)
     category= models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, related_name="category")
-    seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name="seller")
-    watchers= models.ManyToManyField(User, blank=True, related_name="watched_listing")
+    watchlist = models.ManyToManyField(User, blank = True, related_name= "watchlist" )
 
     def __str__(self):
         return self.title
@@ -60,8 +57,7 @@ class AuctionListing(models.Model):
     def get_listing_category(self):
         return self.category
 
-    def get_listing_seller(self):
-        return self.seller
+
 
 
 
@@ -71,15 +67,9 @@ class AuctionListing(models.Model):
 class AuctionListingForm(forms.ModelForm):
     class Meta:
         model = AuctionListing
-        fields = ['title', 'description', 'imageUrl', 'startingBid', 'isActive', 'category', 'seller']
+        fields = ['title', 'description', 'imageUrl', 'startingBid', 'isActive', 'category']
 
 
-class WatchList(models.Model):
-    auction_listing= models.ManyToManyField(AuctionListing, blank=True, related_name="watchlist")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
-
-    def __str__(self):
-        return f"{self.user}'s watchlist"
 
 
 

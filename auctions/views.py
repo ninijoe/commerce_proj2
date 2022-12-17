@@ -8,7 +8,7 @@ from django.middleware import csrf
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-from .models import User, Category, AuctionListing, AuctionListingForm, WatchList
+from .models import User, Category, AuctionListing, AuctionListingForm
 
 
 
@@ -31,6 +31,9 @@ def categories(request):
 
 def listing(request, listing_id):
     listing = AuctionListing.objects.get(pk=listing_id)
+
+    isListingInWatchList = request.user in listing.watchlist.all()
+
     context = {
         'title': listing.get_listing_title(),
         'description': listing.get_listing_description(),
@@ -38,7 +41,10 @@ def listing(request, listing_id):
         'startingBid': listing.get_listing_startingBid(),
         'isActive': listing.get_listing_isActive(),
         'category': listing.get_listing_category(),
-        'seller': listing.get_listing_seller(),
+        'isListingInWatchList': isListingInWatchList,
+        'listing_id': listing_id,
+        'listing': listing
+
 
     }
     return render(request, 'auctions/listing.html', context)
@@ -50,9 +56,7 @@ def listing(request, listing_id):
 
 @login_required(login_url='login')
 def watchlist(request):
-    listing = AuctionListing.objects.filter(watchers= request.user)
-    watchlist= WatchList.objects.filter(user= request.user)
-    return render(request, 'auctions/watchlist.html', {'watchlist': watchlist, 'listing': listing})
+    return
 
 
 
@@ -99,35 +103,30 @@ def category_listings(request, category_id):
 
 
 @login_required(login_url='login')
-def add_to_watchlist(request):
-    if request.method == 'POST':
-        listing_id = request.POST.get('listing_id')
-        user = request.user
+def add_to_watchlist(request , listing_id ):
+    listing = AuctionListing.objects.get(pk=listing_id)
+    user = request.user
+    listing.watchlist.add(user)
+    return HttpResponseRedirect(reverse("listing") , args= (listing_id, ))
 
-        try:
-            listing = AuctionListing.objects.get(id=listing_id)
 
-            # check if the listing is already in the watchlist
-            if Watchlist.objects.filter(user=user, listing=listing).exists():
-                context = {
-                    'message': 'listing exist in watchlist already'
-                }
-                return render(request, 'auctions/watchlist.html', context)
-            else:
-                watchlist, created = Watchlist.objects.create(user=user, listing=listing)
-                context = {
-                    'message': 'listing added successfully',
-                    'watchlist': watchlist
-                }
-                return render(request, 'auctions/watchlist.html', context)
-        except ValueError:
-            return redirect('watchlist')
+
+
+
+
 
 
 
 @login_required(login_url='login')
-def remove_from_watchlist(request ):
-    return
+def remove_from_watchlist(request , listing_id ):
+    listing = AuctionListing.objects.get(pk=listing_id)
+    user = request.user
+    listing.watchlist.remove(user)
+    return HttpResponseRedirect(reverse("listing") , args= (listing_id, ))
+
+
+
+
 
 
 
