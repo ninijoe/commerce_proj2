@@ -54,14 +54,6 @@ def listing(request, listing_id):
 
 
 
-@login_required(login_url='login')
-def watchlist(request):
-    return
-
-
-
-
-
 
 
 
@@ -102,12 +94,41 @@ def category_listings(request, category_id):
 
 
 
+
+
+@login_required(login_url='login')
+def watchlist(request):
+    user = request.user
+    listings = AuctionListing.objects.all()
+    AreListingsInWatchList = request.user in listings.watchlist.all()
+    watchlist = listings.filter(watchlist__user=user)
+    context = {
+        'listings': listings,
+        'watchlist': watchlist,
+        'watchlist__user': watchlist__user,
+        'AreListingsInWatchList': AreListingsInWatchList
+
+    }
+
+
+    return render(request, 'auctions/watchlist.html', context)
+
+
+
+
+
+
+
+
+
+
+
 @login_required(login_url='login')
 def add_to_watchlist(request , listing_id ):
     listing = AuctionListing.objects.get(pk=listing_id)
     user = request.user
     listing.watchlist.add(user)
-    return HttpResponseRedirect(reverse("listing") , args= (listing_id, ))
+    return
 
 
 
@@ -122,7 +143,7 @@ def remove_from_watchlist(request , listing_id ):
     listing = AuctionListing.objects.get(pk=listing_id)
     user = request.user
     listing.watchlist.remove(user)
-    return HttpResponseRedirect(reverse("listing") , args= (listing_id, ))
+    return
 
 
 

@@ -46,6 +46,13 @@
     font-weight: bold;
     margin-bottom: 5px;
     margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 23px;     /* fallback */
+    max-height: 32px;      /* fallback */
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
 }
 
 .card-text {
@@ -102,14 +109,18 @@ select {
 
 
 
+
 </style>
+
+
 
 {%csrf_token%}
 
 
-<h2 class="text-center" style="color: white;"> All Active Listings</h2>
+<h2 class="text-center" style="color: white;">All Active Listings</h2>
 <br>
 <div class="row mx-5" >
+
 {%for listing in listings %}
 <div class="card mx-3" >
 
@@ -118,18 +129,20 @@ select {
       {%csrf_token%}
       <img class= "card-img-top" src="{{listing.imageUrl}}" alt="imageurl" style="width:130px; height:175px; border-radius: 10px; margin: 0 auto;">
       <h5 class="card-title" style="font-weight:bold; color:white; font-size:1.5rem;">{{listing.title}}</h5>
-      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#description" style="width: 50px; height: 40px;">
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#description_{{listing.id}}" style="width: 50px; height: 40px;">
         <span class="collapse-icon"><h3>˯</h3></span>
       </button>
-      <div id="description" class="collapse">
-        <p class="card-text" style="font-size:0.8rem;color:black;">{{listing.description}}</p>
+
+      <div id="description_{{listing.id}}" class="collapse" style="margin-top: -19px;">
+        <br>
+        <p class="card-text" style="font-size:0.8rem;color:black; font-weight: bold; ">{{listing.description}}</p>
         <p class="card-text" style="font-size:1.0rem; color:white;">${{listing.startingBid}}</p>
         <input type="submit" name="listing" value="view">
       </div>
     </div>
   </form>
-
 </div>
+
 {% endfor %}
 </div>
 

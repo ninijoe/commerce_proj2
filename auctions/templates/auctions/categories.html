@@ -13,6 +13,8 @@
       border: 1px solid #ccc;
       box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
       margin-bottom: 20px;
+      width: 10rem;
+      height: 3rem;
   }
 
   h2{
@@ -28,12 +30,13 @@
   padding: 10px;
   text-decoration: none;
   text-decoration-line: none;
+  text-align: center;
+  padding: 0.5rem;
 }
 
 .category-name span{
     font-size: 1.2rem;
     font-weight: bold;
-    color: #000;
     text-decoration: none;
     text-decoration-line: none;
 }
@@ -64,7 +67,7 @@
         <a href="{% url 'category_listings' category.id %}">
           <div class="category">
 
-                <span class="category-name">
+                <span class="category-name" style="color: black;">
                   {{category.categoryName}}
                 </span>
 
