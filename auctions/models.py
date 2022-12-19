@@ -88,7 +88,9 @@ class Bid(models.Model):
 
 # Model 3: Comments
 class Comment(models.Model):
-    auction_listing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE)
-    commenter = models.ForeignKey(User, on_delete=models.CASCADE)
-    comment_text = models.TextField()
-    comment_date = models.DateTimeField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name="author", default=None)
+    auction_listing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE, blank=True, related_name="auction_listing")
+    comment = models.TextField(max_length=200 , default=None)
+
+    def __str__(self):
+        return f" {self.author} comment on {self.auction_listing} "

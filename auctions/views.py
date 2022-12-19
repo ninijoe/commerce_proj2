@@ -8,7 +8,7 @@ from django.middleware import csrf
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-from .models import User, Category, AuctionListing, AuctionListingForm
+from .models import User, Category, AuctionListing, AuctionListingForm, Comment
 
 
 
@@ -34,6 +34,8 @@ def listing(request, listing_id):
 
     isListingInWatchList = request.user in listing.watchlist.all()
 
+    all_Comments = Comment.objects.filter(auction_listing = listing)
+
     context = {
         'title': listing.get_listing_title(),
         'description': listing.get_listing_description(),
@@ -43,7 +45,8 @@ def listing(request, listing_id):
         'category': listing.get_listing_category(),
         'isListingInWatchList': isListingInWatchList,
         'listing_id': listing_id,
-        'listing': listing
+        'listing': listing,
+        'all_Comments': all_Comments
 
 
     }
@@ -99,19 +102,12 @@ def category_listings(request, category_id):
 @login_required(login_url='login')
 def watchlist(request):
     user = request.user
-    listings = AuctionListing.objects.all()
-    AreListingsInWatchList = request.user in listings.watchlist.all()
-    watchlist = listings.filter(watchlist__user=user)
+    listings = user.watchlist.all()
     context = {
-        'listings': listings,
-        'watchlist': watchlist,
-        'watchlist__user': watchlist__user,
-        'AreListingsInWatchList': AreListingsInWatchList
-
+        'listings': listings
     }
-
-
     return render(request, 'auctions/watchlist.html', context)
+
 
 
 
@@ -128,8 +124,7 @@ def add_to_watchlist(request , listing_id ):
     listing = AuctionListing.objects.get(pk=listing_id)
     user = request.user
     listing.watchlist.add(user)
-    return
-
+    return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
 
 
 
@@ -143,10 +138,28 @@ def remove_from_watchlist(request , listing_id ):
     listing = AuctionListing.objects.get(pk=listing_id)
     user = request.user
     listing.watchlist.remove(user)
-    return
+    return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
 
 
 
+
+
+
+
+@login_required(login_url='login')
+def comment(request , listing_id ):
+    user = request.user
+    listing = AuctionListing.objects.get(pk=listing_id)
+    message = request.POST.get('comment')
+    comment = Comment (
+        author = user,
+        auction_listing = listing,
+        comment = message
+    )
+
+    comment.save()
+
+    return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
 
 
 

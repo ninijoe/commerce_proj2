@@ -18,9 +18,12 @@
 }
 
 .card {
-    border: 1px solid #ccc;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    margin-bottom: 40px;
+    width: 10rem;
+    height: 25rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    background-color: black;
+    margin-bottom: 35px;
 }
 
 .card-img-top {
@@ -34,6 +37,7 @@
 
 .card:hover{
     transform: scale(1.12);
+    background-color: red;
 }
 
 
@@ -42,6 +46,13 @@
     font-weight: bold;
     margin-bottom: 5px;
     margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 23px;     /* fallback */
+    max-height: 32px;      /* fallback */
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
 }
 
 .card-text {
@@ -96,34 +107,42 @@ select {
 
 
 
+
+
+
 </style>
+
+
 
 {%csrf_token%}
 
 
-<h2 class="text-center" style="color: white;"> Watchlist</h2>
+<h2 class="text-center" style="color: white;">Watchlist</h2>
 <br>
 <div class="row mx-5" >
+
 {%for listing in listings %}
-{{message}}
-<div class="card mx-3" style="width: 10rem; height: 25rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s; background-color: black;">
+<div class="card mx-3" >
 
   <form class="listing" action="{% url 'listing' listing.id %}" method="get">
     <div class="card-body" style="text-align: center; position: relative;">
-      <img class= "card-img-top" src= "{{listing.imageUrl}}" alt="imageurl" style="width:130px; height:175px; border-radius: 10px; margin: 0 auto;">
+      {%csrf_token%}
+      <img class= "card-img-top" src="{{listing.imageUrl}}" alt="imageurl" style="width:130px; height:175px; border-radius: 10px; margin: 0 auto;">
       <h5 class="card-title" style="font-weight:bold; color:white; font-size:1.5rem;">{{listing.title}}</h5>
-      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#description" style="width: 50px; height: 40px;">
-        <span class="collapse-icon">˯</span>
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#description_{{listing.id}}" style="width: 50px; height: 40px;">
+        <span class="collapse-icon"><h3>˯</h3></span>
       </button>
-      <div id="description" class="collapse">
-        <p class="card-text" style="font-size:0.8rem;color:grey;">{{listing.description}}</p>
+
+      <div id="description_{{listing.id}}" class="collapse" style="margin-top: -19px;">
+        <br>
+        <p class="card-text" style="font-size:0.8rem;color:black; font-weight: bold; ">{{listing.description}}</p>
         <p class="card-text" style="font-size:1.0rem; color:white;">${{listing.startingBid}}</p>
-        <input type="submit" name="listing" value="more">
+        <input type="submit" name="listing" value="view">
       </div>
     </div>
   </form>
-
 </div>
+
 {% endfor %}
 </div>
 
