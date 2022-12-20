@@ -95,7 +95,7 @@ def add_bid(request, listing_id):
         'listing': listing,
         'form': form
     }
-
+    messages.success(request, "Congratulations you are currently the highest bidder")
     return render(request, 'auctions/listing.html', context)
 
 

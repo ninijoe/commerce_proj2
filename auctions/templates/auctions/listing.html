@@ -100,12 +100,21 @@ h2.text-center {
 }
 
 .success-message {
-  color: white;
+  color: lime;
   justify-content: center;
   position: relative;
   top: -40px;
   left: 77px;
   animation: glow 1s ease-in-out infinite alternate;
+}
+
+.call-to-action-message {
+  color: pink;
+  justify-content: center;
+  position: relative;
+  top: -40px;
+  left: 77px;
+
 }
 
 @keyframes glow {
@@ -119,6 +128,16 @@ h2.text-center {
 }
 
 
+button{
+  width: 100%;
+  padding: 10px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  background-color:
+  lightblue; color: black;
+}
+
+
 
 
 </style>
@@ -127,10 +146,10 @@ h2.text-center {
 
 {% if messages %}
   {% for message in messages %}
-    <div style="color: white;" class="alert alert-{{ message.tags }}" >{{ message }}</div>
+    <div style="color: white;"class="alert alert-{{ message.tags }}" >{{ message }}</div>
   {% endfor %}
 {% endif %}
-<h2 class="text-center" style="color: white; position: sticky;"> {{title}}</h2>
+<h2 class="text-center" style="color: white; position: sticky; font-family: 'Courier New', monospace;"> {{title}}</h2>
 <br>
 
 <div class="card-body" style="text-align: center; position: relative; display: flex;">
@@ -147,8 +166,16 @@ h2.text-center {
 
 
     <p class="activity-AbstractUser__category" style="font-size:1.0rem; color:lightblue; font-weight:bold;"><strong>CATEGORY</strong>{{category}}</p>
-    <p class="activity-AbstractUser__price text-center" style="font-size:1.0rem; color:green; font-weight:bold;"><strong>CURRENT BID</strong>${{listing.startingBid}}</p>
-
+    <strong>CURRENT BID</strong>
+    <p class="activity-AbstractUser__price text-center" style="font-size:2.1rem; color:lime; font-weight:bold; animation: glow 1s ease-in-out infinite alternate;">${{listing.startingBid}}</p>
+    <div class="row">
+      <form action="{% url 'add_bid' listing_id %}" method="POST" style="margin-top: 10px;">
+        {%csrf_token%}
+        <input type="hidden" name="listing_id" value="{{listing.id}}">
+        <input type="text" name="bid" placeholder="Enter your bid" style="width: 100%; padding: 10px; font-size: 1.2rem; border-radius: 5px;">
+        <button type="submit" class="btn btn-success" name="button">Bid</button>
+      </form>
+    </div>
   </div>
 
 </div>
@@ -169,7 +196,7 @@ h2.text-center {
               {%if isListingInWatchList%}
 
 
-                  <div class="success-message" style= " color: white; justify-content: center; position: relative; top: -40px; left: 109px;">
+                  <div class="success-message" style= "  justify-content: center; position: relative; top: -40px; left: 109px;">
                     <p>Listing is in Watchlist</p>
                   </div>
                   <form action= "{% url 'remove_from_watchlist' listing_id %}" method="POST" style= "justify-content: center; position: relative; top: -10px; left: -73px;">
@@ -183,7 +210,7 @@ h2.text-center {
 
                   {% else %}
 
-                  <div class="success-message" style= " color: white; justify-content: center; position: relative; top: -40px; left: 77px; ">
+                  <div class="call-to-action-message" style= " justify-content: center; position: relative; top: -40px; left: 77px; ">
                     <p>listing is not in Watchlist</p>
                   </div>
                   <form action= "{% url 'add_to_watchlist' listing_id %}" method="POST" style= "justify-content: center; position: relative; top: -10px; left: -90px;">
@@ -201,14 +228,7 @@ h2.text-center {
 
 
 
-              <div class="row">
-                <form action="{% url 'add_bid' listing_id %}" method="POST" style="margin-top: 10px;">
-                  {%csrf_token%}
-                  <input type="hidden" name="listing_id" value="{{listing.id}}">
-                  <input type="text" name="bid" placeholder="Enter your bid" style="width: 100%; padding: 10px; font-size: 1.2rem; border-radius: 5px;">
-                  <button type="submit" class="btn btn-success" name="button" style="width: 100%; padding: 10px; font-size: 1.2rem; border-radius: 5px; background-color: lightblue; color: black;">Bid</button>
-                </form>
-              </div>
+
 
 
 
@@ -248,12 +268,12 @@ h2.text-center {
 
 <ul class="list-group">
   {%csrf_token%}
-{% for comment in all_Comments %}
+{% for comment in all_Comments reversed %}
 
   <li class="list-group-item" style=" margin-left:12px;  width: 96%; padding: 15px; border-radius: 20px; border: 3px solid black; font-size: 16px; background-color: grey; color: white; outline: none;">
     <h6>{{comment.comment}} <hr style="border: 1px solid #000;"> {{comment.author}}</h6>
-
   </li>
+  <br>
 
 {% endfor %}
 </ul>

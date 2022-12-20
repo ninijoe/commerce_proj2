@@ -122,6 +122,17 @@
     }
 
 
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+
+
 
     </style>
     {%csrf_token%}
@@ -134,7 +145,11 @@
             <img src="https://raw.githubusercontent.com/ninijoe/wolfe/main/images/anotherwolfe.png" alt="logo">
             <strong> welcome {{ user.username }}</strong>
           </div>
-          <h1 style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.8em; font-weight: bold; text-align: center; padding: 10px; background-color: red; border-radius: 5px;">auctionbox</h1>
+          <h1>
+              <div style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.2em; font-weight: bold; text-align: center; padding: 10px; background-color: blue; border-radius: 5px; text-shadow: 0 0 10px #ff3; ">auctionbox</div>
+          </h1>
+          <div style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.2em; font-weight: bold; text-align: center; padding: 10px; background-color: red; border-radius: 5px; text-shadow: 0 0 10px #ff3; animation: marquee 5s linear infinite;">live now </div>
+          <br>
           <ul class="nav">
                   <li class="nav-item">
                       <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
