@@ -36,6 +36,7 @@ class AuctionListing(models.Model):
     isActive= models.BooleanField(default=True)
     category= models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, related_name="category")
     watchlist = models.ManyToManyField(User, blank = True, related_name= "watchlist" )
+    seller_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False, related_name="seller")
 
     def __str__(self):
         return self.title
@@ -60,6 +61,9 @@ class AuctionListing(models.Model):
         return self.category
 
 
+    def get_listing_seller_id(self):
+        return self.seller_id
+
 
 
 
@@ -69,7 +73,7 @@ class AuctionListing(models.Model):
 class AuctionListingForm(forms.ModelForm):
     class Meta:
         model = AuctionListing
-        fields = ['title', 'description', 'imageUrl', 'startingBid', 'isActive', 'category']
+        fields = ['title', 'description', 'imageUrl', 'startingBid', 'isActive', 'category', 'seller_id']
 
 
 

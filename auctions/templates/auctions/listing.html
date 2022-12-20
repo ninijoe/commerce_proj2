@@ -151,7 +151,7 @@ button{
 
 {% if messages %}
   {% for message in messages %}
-    <div style="color: lime; text-align: center"class="alert alert-{{ message.tags }}" >{{ message }}</div>
+  <div class="alert alert-success" role="alert">{{ message }}</div>
   {% endfor %}
 {% endif %}
 <h2 class="text-center" style="color: white; position: sticky; font-family: 'Courier New', monospace;"> {{title}}</h2>

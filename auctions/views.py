@@ -64,6 +64,7 @@ def listing(request, listing_id):
 @login_required(login_url='login')
 def add_bid(request, listing_id):
     listing = AuctionListing.objects.get(pk=listing_id)
+    bidder = request.user
     if request.method == 'POST':
         form = BidForm(request.POST)
         if form.is_valid():
@@ -71,11 +72,17 @@ def add_bid(request, listing_id):
             if bid >= listing.startingBid:
                 try:
                     float(bid)
-                    listing.startingBid = bid
+                    # get the highest bid from the database
+                    highest_bid = Bid.objects.filter(auction_listing=listing).order_by('-bid').first()
+                    if highest_bid is not None:
+                        listing.startingBid = highest_bid.bid
+                    else:
+                        listing.startingBid = bid
                     listing.save()
+                    bid_obj = Bid.objects.create(bid=bid, bidder=bidder, auction_listing=listing)
+                    bid_obj.save()
                     messages.error(request, "Congratulations you are currently the highest bidder")
                     return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
-
                 except ValueError:
                     raise ValueError("Bid amount must be an integer or floating point number ").format(user)
 
@@ -95,7 +102,8 @@ def add_bid(request, listing_id):
         'category': listing.get_listing_category(),
         'listing_id': listing_id,
         'listing': listing,
-        'form': form
+        'form': form,
+        'bidder': bidder
     }
     messages.success(request, "Congratulations you are currently the highest bidder")
     return render(request, 'auctions/listing.html', context)
