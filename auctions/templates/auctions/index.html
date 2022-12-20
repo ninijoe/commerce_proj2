@@ -86,7 +86,7 @@
     display: -webkit-box;
     line-height: 16px;     /* fallback */
     max-height: 32px;      /* fallback */
-    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-line-clamp: 1; /* number of lines to show */
     -webkit-box-orient: vertical;
 }
 
@@ -138,15 +138,16 @@ select {
 </style>
 
 {%csrf_token%}
-
+<br>
 
 {% if messages %}
   {% for message in messages %}
   <div class="alert alert-success" role="alert">{{ message }}</div>
   {% endfor %}
 {% endif %}
+
 <h2 class="text-center" style="color: white;">All Active Listings</h2>
-<br>
+
 
 <div class="row mx-7" >
 {%for listing in listings reversed %}

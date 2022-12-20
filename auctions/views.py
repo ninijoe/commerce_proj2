@@ -100,7 +100,7 @@ def add_bid(request, listing_id):
         'form': form,
         'bidder': bidder
     }
-    messages.success(request, "Congratulations you are currently the highest bidder")
+    messages.success(request, "Congratulations! You are currently the highest bidder")
     return render(request, 'auctions/listing.html', context)
 
 
@@ -128,7 +128,7 @@ def remove_bid(request, listing_id):
         except ValueError:
             raise ValueError("Bid could not be removed").format(user)
         except Bid.DoesNotExist:
-            messages.error(request, "You cannot remove any more bids")
+            messages.error(request, "You cannot remove anymore bids")
             return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
     else:
         messages.error(request, "You are not the highest bidder and cannot remove your bid.")
@@ -202,7 +202,7 @@ def add_to_watchlist(request , listing_id ):
     listing = AuctionListing.objects.get(pk=listing_id)
     user = request.user
     listing.watchlist.add(user)
-    messages.error(request, "listing was successfully added to watchlist")
+    messages.error(request, "Listing was successfully added to watchlist")
     return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
 
 
@@ -217,7 +217,7 @@ def remove_from_watchlist(request , listing_id ):
     listing = AuctionListing.objects.get(pk=listing_id)
     user = request.user
     listing.watchlist.remove(user)
-    messages.error(request, "listing was successfully removed from watchlist")
+    messages.error(request, "Listing was successfully removed from watchlist")
 
     return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
 

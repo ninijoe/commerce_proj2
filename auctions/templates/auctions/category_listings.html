@@ -140,7 +140,7 @@ select {
 {%csrf_token%}
 
 
-<h2 class="text-center" style="color: white;">All Active Listings</h2>
+<h2 class="text-center" style="color: white;">{{category.categoryName}}</h2>
 <br>
 <div class="row mx-7" >
 {%for listing in listings %}
