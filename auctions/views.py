@@ -64,6 +64,7 @@ def listing(request, listing_id):
 @login_required(login_url='login')
 def add_bid(request, listing_id):
     listing = AuctionListing.objects.get(pk=listing_id)
+    seller = listing.seller_id
     bidder = request.user
     if request.method == 'POST':
         form = BidForm(request.POST)
@@ -71,17 +72,11 @@ def add_bid(request, listing_id):
             bid = form.cleaned_data['bid']
             if bid >= listing.startingBid:
                 try:
-                    float(bid)
-                    # get the highest bid from the database
-                    highest_bid = Bid.objects.filter(auction_listing=listing).order_by('-bid').first()
-                    if highest_bid is not None:
-                        listing.startingBid = highest_bid.bid
-                    else:
-                        listing.startingBid = bid
+                    listing.startingBid = bid
                     listing.save()
                     bid_obj = Bid.objects.create(bid=bid, bidder=bidder, auction_listing=listing)
                     bid_obj.save()
-                    messages.error(request, "Congratulations you are currently the highest bidder")
+                    messages.error(request, "Congratulations you are currently the highest bidder. " + str(seller.username.capitalize()) + " will be notified you placed a new bid.")
                     return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
                 except ValueError:
                     raise ValueError("Bid amount must be an integer or floating point number ").format(user)
@@ -107,6 +102,34 @@ def add_bid(request, listing_id):
     }
     messages.success(request, "Congratulations you are currently the highest bidder")
     return render(request, 'auctions/listing.html', context)
+
+
+
+
+
+
+
+@login_required(login_url='login')
+def remove_bid(request, listing_id):
+    listing = AuctionListing.objects.get(pk=listing_id)
+    bidder = request.user
+    if request.method == 'POST':
+        try:
+            bid_obj = Bid.objects.filter(bidder=bidder, auction_listing=listing).latest('bid')
+            bid_obj.delete()
+            listing.startingBid = Bid.objects.filter(auction_listing=listing).latest('bid').bid
+            listing.save()
+            messages.success(request, "Your bid has been removed.")
+
+            return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
+        except ValueError:
+            raise ValueError("Bid could not be removed").format(user)
+        except Bid.DoesNotExist:
+            messages.error(request, "You cannot remove any more bids")
+            return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
+    else:
+        messages.error(request, "You are not the highest bidder and cannot remove your bid.")
+        return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
 
 
 
@@ -176,6 +199,7 @@ def add_to_watchlist(request , listing_id ):
     listing = AuctionListing.objects.get(pk=listing_id)
     user = request.user
     listing.watchlist.add(user)
+    messages.error(request, "listing was successfully added to watchlist")
     return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
 
 
@@ -190,6 +214,8 @@ def remove_from_watchlist(request , listing_id ):
     listing = AuctionListing.objects.get(pk=listing_id)
     user = request.user
     listing.watchlist.remove(user)
+    messages.error(request, "listing was successfully removed from watchlist")
+
     return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
 
 
