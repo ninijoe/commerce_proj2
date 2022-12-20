@@ -73,6 +73,7 @@ def add_bid(request, listing_id):
                     float(bid)
                     listing.startingBid = bid
                     listing.save()
+                    messages.error(request, "Congratulations you are currently the highest bidder")
                     return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
 
                 except ValueError:
@@ -82,6 +83,7 @@ def add_bid(request, listing_id):
                 messages.error(request, "Bid must be at least as large as the starting bid, and must be greater than any other bids that have been placed (if any).")
                 return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
     else:
+
         form = BidForm()
 
     context = {

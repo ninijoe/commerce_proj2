@@ -85,7 +85,7 @@ h2.text-center {
     }
 
     .activity-AbstractUser{
-      margin-right: 90px;
+      margin-right: 0px;
       margin-top: -24px;
       margin-left: 80px;
 
@@ -151,7 +151,7 @@ button{
 
 {% if messages %}
   {% for message in messages %}
-    <div style="color: white;"class="alert alert-{{ message.tags }}" >{{ message }}</div>
+    <div style="color: lime; text-align: center"class="alert alert-{{ message.tags }}" >{{ message }}</div>
   {% endfor %}
 {% endif %}
 <h2 class="text-center" style="color: white; position: sticky; font-family: 'Courier New', monospace;"> {{title}}</h2>
@@ -164,7 +164,7 @@ button{
   <div class="activity-AbstractUser">
 
     {% if isActive %}
-    <p class="activity-AbstractUser__active" style="font-size:1.0rem;color:green; font-weight:bold;"><strong>ACTIVE</strong> <br>{{isActive}} </p>
+    <p class="activity-AbstractUser__active" style="font-size:1.0rem;color:green; font-weight:bold;"><strong>ACTIVE</strong> {{isActive}} </p>
     {%else%}
     <p class="activity-AbstractUser__inactive" style="font-size:1.0rem;color:red; font-weight:bold;"><strong>ACTIVE</strong>{{isActive}} </p>
     {% endif %}

@@ -40,9 +40,31 @@
     background-color: red;
 }
 
+.card:hover{
+    transform: scale(1.12);
+    background-color: blue;
+}
+
+.card:hover{
+    transform: scale(1.12);
+}
+
+
+
+.card:hover{
+    transform: scale(1.12);
+    background-color: var(--random-color);
+}
+
+:root {
+    --random-color: red;
+
+    --random-color: ${['red', 'blue', 'yellow', 'green'][Math.floor(Math.random() * 4)]};
+}
 
 .card-title {
-    font-size: 1.2rem;
+    font-family: 'Courier New', monospace;
+    font-size: 1.0rem;
     font-weight: bold;
     margin-bottom: 5px;
     margin-top: 10px;
@@ -55,8 +77,9 @@
     -webkit-box-orient: vertical;
 }
 
+
 .card-text {
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: white;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -68,10 +91,10 @@
 }
 
 .btn {
-    background-color: #0099ff;
+    background-color: black;
     color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+    padding: 0px 10px;
+    border-radius: 10px;
 }
 h2.text-center {
         font-size: 2rem;
@@ -110,43 +133,39 @@ select {
 
 
 
+
+
 </style>
-
-
 
 {%csrf_token%}
 
 
 <h2 class="text-center" style="color: white;">Watchlist</h2>
 <br>
-<div class="row mx-5" >
-
+<div class="row mx-7" >
 {%for listing in listings %}
 <div class="card mx-3" >
 
   <form class="listing" action="{% url 'listing' listing.id %}" method="get">
-    <div class="x-icon" style="position: absolute; top: 0; right: 0;">
-      <a href="{% url 'remove_from_watchlist' listing.id %}"><i class="fas fa-times" style="font-size: 20px;"></i></a>
-    </div>
     <div class="card-body" style="text-align: center; position: relative;">
       {%csrf_token%}
       <img class= "card-img-top" src="{{listing.imageUrl}}" alt="imageurl" style="width:130px; height:175px; border-radius: 10px; margin: 0 auto;">
-      <h5 class="card-title" style="font-weight:bold; color:white; font-size:1.5rem;">{{listing.title}}</h5>
+      <h5 class="card-title" style="font-weight:bold; color:white; font-size:">{{listing.title}}</h5>
       <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#description_{{listing.id}}" style="width: 50px; height: 40px;">
         <span class="collapse-icon"><h3>˯</h3></span>
       </button>
+      <a href="{% url 'remove_from_watchlist' listing.id %}" style="position: absolute; top: 0; right: 0; "><i class="fas fa-times" style="color: red; font-size: 25px; text-decoration: none; text-decoration-line: none; font-style: normal; ">x</i></a>
 
       <div id="description_{{listing.id}}" class="collapse" style="margin-top: -19px;">
         <br>
-        <p class="card-text" style="font-size:0.8rem;color:black; font-weight: bold; ">{{listing.description}}</p>
-        <p class="card-text" style="font-size:1.0rem; color:white;">${{listing.startingBid}}</p>
-        <input type="submit" name="listing" value="view">
+        <p class="card-text" style="font-size:0.8rem;color:white; font-weight: bold; ">{{listing.description}}</p>
+        <p class="card-text" style="font-size:1.0rem; color:lime;">${{listing.startingBid}}</p>
+        <input type="submit" name="listing" style="border-radius:2em;" value="view">
       </div>
     </div>
   </form>
 
 </div>
-
 {% endfor %}
 </div>
 
