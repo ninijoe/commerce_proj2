@@ -60,7 +60,13 @@
 
       .nav-item {
           float: left;
+
       }
+
+      .nav-item-login{
+          top: 50px;
+      }
+
 
       .nav-link {
           display: block;
@@ -73,7 +79,8 @@
       }
 
       .nav-link:hover {
-          background-color: #1DB954;
+          background-color: blue;
+          color: white;
       }
 
       .nav {
@@ -122,14 +129,7 @@
     }
 
 
-        @keyframes marquee {
-            0% {
-                transform: translateX(100%);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
-        }
+        
 
 
 
@@ -175,11 +175,11 @@
                   </div>
                   <h1 style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.8em; font-weight: bold; text-align: center; padding: 10px; background-color: red; border-radius: 5px;">auctionbox</h1>
 
-                  <li class="nav-item">
+                  <li class="nav-item-login">
                       <a class="nav-link" href="{% url 'login' %}">Log In</a>
                   </li>
 
-                  <li class="nav-item">
+                  <li class="nav-item-register">
                       <a class="nav-link" href="{% url 'register' %}">Register</a>
                   </li>
               {% endif %}
