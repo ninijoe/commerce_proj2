@@ -7,8 +7,11 @@ from django.shortcuts import redirect
 from django.middleware import csrf
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+import datetime
+from django.contrib import messages
 
-from .models import User, Category, AuctionListing, AuctionListingForm, Comment
+
+from .models import User, Category, Bid, AuctionListing, AuctionListingForm, Comment, Bid , BidForm
 
 
 
@@ -36,6 +39,7 @@ def listing(request, listing_id):
 
     all_Comments = Comment.objects.filter(auction_listing = listing)
 
+
     context = {
         'title': listing.get_listing_title(),
         'description': listing.get_listing_description(),
@@ -46,7 +50,7 @@ def listing(request, listing_id):
         'isListingInWatchList': isListingInWatchList,
         'listing_id': listing_id,
         'listing': listing,
-        'all_Comments': all_Comments
+        'all_Comments': all_Comments,
 
 
     }
@@ -55,6 +59,44 @@ def listing(request, listing_id):
 
 
 
+
+
+@login_required(login_url='login')
+def add_bid(request, listing_id):
+    listing = AuctionListing.objects.get(pk=listing_id)
+    if request.method == 'POST':
+        form = BidForm(request.POST)
+        if form.is_valid():
+            bid = form.cleaned_data['bid']
+            if bid >= listing.startingBid:
+                try:
+                    float(bid)
+                    listing.startingBid = bid
+                    listing.save()
+                    return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
+
+                except ValueError:
+                    raise ValueError("Bid amount must be an integer or floating point number ").format(user)
+
+            else:
+                messages.error(request, "Bid must be at least as large as the starting bid, and must be greater than any other bids that have been placed (if any).")
+                return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
+    else:
+        form = BidForm()
+
+    context = {
+        'title': listing.get_listing_title(),
+        'description': listing.get_listing_description(),
+        'imageUrl': listing.get_listing_image(),
+        'startingBid': listing.get_listing_startingBid(),
+        'isActive': listing.get_listing_isActive(),
+        'category': listing.get_listing_category(),
+        'listing_id': listing_id,
+        'listing': listing,
+        'form': form
+    }
+
+    return render(request, 'auctions/listing.html', context)
 
 
 
@@ -148,19 +190,25 @@ def remove_from_watchlist(request , listing_id ):
 
 @login_required(login_url='login')
 def comment(request , listing_id ):
-    user = request.user
-    listing = AuctionListing.objects.get(pk=listing_id)
-    message = request.POST.get('comment')
-    comment = Comment (
-        author = user,
-        auction_listing = listing,
-        comment = message
-    )
 
-    comment.save()
+    try:
+        user = request.user
+        listing = AuctionListing.objects.get(pk=listing_id)
+        message = request.POST.get('comment')
 
-    return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
+        comment = Comment (
+            author = user,
+            auction_listing = listing,
+            comment = message,
 
+
+        )
+        comment.save()
+    except ValueError:
+        raise ValueError("You are seeing this error because you have attempted to make a comment. For security purposes, Guest accounts are prohibited from making comments. Log in or create an account to make a comment".format(user))
+
+    else:
+        return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
 
 
 

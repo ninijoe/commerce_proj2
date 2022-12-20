@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django import forms
+import datetime
+
 
 
 class User(AbstractUser):
@@ -25,7 +27,7 @@ class Category(models.Model):
 
 
 
-# Model 1: Auction Listings
+
 class AuctionListing(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -74,23 +76,44 @@ class AuctionListingForm(forms.ModelForm):
 
 
 
-# Model 2: Bids
+
+
+
+
+
 class Bid(models.Model):
-    auction_listing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE)
-    bidder = models.ForeignKey(User, on_delete=models.CASCADE)
-    bid_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    bid_date = models.DateTimeField()
+    bid = models.DecimalField(max_digits=10, decimal_places=2)
+    bidder = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name="bidder", default=None)
+    auction_listing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE, blank=True, related_name="listing", default=None)
+
+    def __str__(self):
+        return f" {self.bidder} made a bid of {self.bid} on {self.auction_listing} "
 
 
 
 
 
 
-# Model 3: Comments
+
+
+
+
+class BidForm(forms.ModelForm):
+    class Meta:
+        model = Bid
+        fields = ['bid']
+
+
+
+
+
+
+
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name="author", default=None)
     auction_listing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE, blank=True, related_name="auction_listing")
     comment = models.TextField(max_length=200 , default=None)
 
+
     def __str__(self):
-        return f" {self.author} comment on {self.auction_listing} "
+        return f" {self.author} dropped a comment on {self.auction_listing} "
