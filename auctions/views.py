@@ -117,7 +117,10 @@ def remove_bid(request, listing_id):
         try:
             bid_obj = Bid.objects.filter(bidder=bidder, auction_listing=listing).latest('bid')
             bid_obj.delete()
-            listing.startingBid = Bid.objects.filter(auction_listing=listing).latest('bid').bid
+            if Bid.objects.filter(auction_listing=listing).exists():
+                listing.startingBid = Bid.objects.filter(auction_listing=listing).latest('bid').bid
+            else:
+                listing.startingBid = listing.startingBid
             listing.save()
             messages.success(request, "Your bid has been removed.")
 
@@ -136,7 +139,6 @@ def remove_bid(request, listing_id):
 
 
 
-
 def create_listing(request):
     #Checks if the request method is a POST request
     if request.method == 'POST':
@@ -148,6 +150,7 @@ def create_listing(request):
             listing = form.save(commit=False)
             listing.seller = request.user
             listing.save()
+            messages.success(request, "Listing created successfully!")
             return HttpResponseRedirect(reverse("index"))
     else:
         #If the request method is not a POST request, creates an empty AuctionListingForm object
@@ -244,6 +247,7 @@ def comment(request , listing_id ):
         raise ValueError("You are seeing this error because you have attempted to make a comment. For security purposes, Guest accounts are prohibited from making comments. Log in or create an account to make a comment".format(user))
 
     else:
+        messages.success(request, "Comment was successfully added")
         return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
 
 

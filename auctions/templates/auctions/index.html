@@ -140,10 +140,16 @@ select {
 {%csrf_token%}
 
 
+{% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-success" role="alert">{{ message }}</div>
+  {% endfor %}
+{% endif %}
 <h2 class="text-center" style="color: white;">All Active Listings</h2>
 <br>
+
 <div class="row mx-7" >
-{%for listing in listings %}
+{%for listing in listings reversed %}
 <div class="card mx-3" >
 
   <form class="listing" action="{% url 'listing' listing.id %}" method="get">
