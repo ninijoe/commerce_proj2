@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -72,7 +73,7 @@
           display: block;
           color: white;
           text-align: center;
-          padding: 14px 16px;
+          padding: 4px 6px;
           text-decoration: none;
           font-family: 'Roboto', sans-serif;
           font-size: 1.2rem;
@@ -91,6 +92,7 @@
         background-color: #333;
         display: flex;
         flex-wrap: nowrap;
+
     }
 
 
@@ -103,6 +105,8 @@
         justify-content: center;
         flex: 0 0 auto;
         font-size: 1rem;
+        border-radius: 20px;
+
     }
 
     .nav li a:hover {
@@ -129,7 +133,19 @@
     }
 
 
-
+    .footer-section{
+      -webkit-text-size-adjust: 100%;
+      font-family: Open Sans, Helvetica, Arial, sans;
+      color: #333333;
+      font-size: 1.1em;
+      width: 100%;
+      margin-left: 0px;
+      background-color: #212121f2;
+      position: relative;
+      background-color: transparent;
+      margin-top: 100px;
+      font-size: 1.1em;
+    }
 
 
 
@@ -146,6 +162,7 @@
             <img src="https://raw.githubusercontent.com/ninijoe/wolfe/main/images/anotherwolfe.png" alt="logo">
             <strong> welcome {{ user.username }}</strong>
           </div>
+
           <h1>
               <div style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.2em; font-weight: bold; text-align: center; padding: 10px; background-color: blue; border-radius: 5px; text-shadow: 0 0 10px #ff3; ">auctionbox</div>
           </h1>
@@ -189,7 +206,48 @@
 
         </div>
 
+
+
         {% block body %}
         {% endblock %}
     </body>
+    <br><br><br>
+
+
+    <div class="footer-section">
+      <section>
+        <footer style="text-align: center; color: white; font-family: 'Courier New', monospace;">© 2023 Copyright AuctionBox </footer>
+
+        <div class="footer-links">
+          <a href="{% url 'terms' %}">Terms </a>
+          <a href="#">Privacy </a>
+          <a href="#">faq </a>
+        </div>
+
+
+        <style media="screen">
+
+
+
+
+           .footer-links{
+             justify-content: center;
+             text-align: center;
+             flex: auto;
+             flex-direction: row;
+             font-family: 'Courier New', monospace;
+             text-decoration: none;
+           }
+           .footer-links a:hover{
+             color: pink;
+             justify-content: center;
+             text-align: center;
+             flex: auto;
+             flex-direction: row;
+             font-family: 'Courier New', monospace;
+             text-decoration: none;
+           }
+        </style>
+      </section>
+    </div>
 </html>

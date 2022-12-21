@@ -129,6 +129,18 @@ select {
     }
 
 
+    a{
+      color: #ff726f;
+      text-decoration: none;
+      text-decoration-line: none;
+    }
+
+    a:hover{
+      color: red;
+      text-decoration: none;
+      text-decoration-line: none;
+
+    }
 
 
 
@@ -138,7 +150,11 @@ select {
 </style>
 
 {%csrf_token%}
-
+{% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-success" role="alert">{{ message }}</div>
+  {% endfor %}
+{% endif %}
 
 <h2 class="text-center" style="color: white;">Watchlist</h2>
 <br>
@@ -154,7 +170,7 @@ select {
       <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#description_{{listing.id}}" style="width: 50px; height: 40px;">
         <span class="collapse-icon"><h3>˯</h3></span>
       </button>
-      <a href="{% url 'remove_from_watchlist' listing.id %}" style="position: absolute; top: 0; right: 0; "><i class="fas fa-times" style="color: red; font-size: 25px; text-decoration: none; text-decoration-line: none; font-style: normal; ">x</i></a>
+      <a href="{% url 'remove_from_watchlist' listing.id %}" style="position: absolute; top: 0; right: 0; "><i class="fas fa-times" style=" font-size: 25px; text-decoration: none; text-decoration-line: none;  ">x</i></a>
 
       <div id="description_{{listing.id}}" class="collapse" style="margin-top: -19px;">
         <br>

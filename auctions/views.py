@@ -35,7 +35,7 @@ def categories(request):
 def listing(request, listing_id):
     listing = AuctionListing.objects.get(pk=listing_id)
 
-    isListingInWatchList = request.user in listing.watchlist.all()
+    isListingInWatchList = listing in listing.watchlist.all()
 
     all_Comments = Comment.objects.filter(auction_listing = listing)
 
@@ -76,13 +76,13 @@ def add_bid(request, listing_id):
                     listing.save()
                     bid_obj = Bid.objects.create(bid=bid, bidder=bidder, auction_listing=listing)
                     bid_obj.save()
-                    messages.error(request, "Congratulations you are currently the highest bidder. " + str(seller.username.capitalize()) + " will be notified you placed a new bid.")
+                    messages.error(request, "Congratulations! You are currently the highest bidder. " + str(seller.username.capitalize()) + " will be notified you placed a new bid.")
                     return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
                 except ValueError:
                     raise ValueError("Bid amount must be an integer or floating point number ").format(user)
 
             else:
-                messages.error(request, "Bid must be at least as large as the starting bid, and must be greater than any other bids that have been placed (if any).")
+                messages.error(request, "Bid must be at least as large as the current bid, and must be greater than any other bids that have been placed (if any).")
                 return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
     else:
 
@@ -128,7 +128,7 @@ def remove_bid(request, listing_id):
         except ValueError:
             raise ValueError("Bid could not be removed").format(user)
         except Bid.DoesNotExist:
-            messages.error(request, "You cannot remove anymore bids")
+            messages.error(request, "You cannot remove any more bids since you are not the highest bidder")
             return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
     else:
         messages.error(request, "You are not the highest bidder and cannot remove your bid.")
@@ -203,7 +203,7 @@ def add_to_watchlist(request , listing_id ):
     user = request.user
     listing.watchlist.add(user)
     messages.error(request, "Listing was successfully added to watchlist")
-    return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
+    return HttpResponseRedirect(reverse("watchlist"))
 
 
 
@@ -219,7 +219,7 @@ def remove_from_watchlist(request , listing_id ):
     listing.watchlist.remove(user)
     messages.error(request, "Listing was successfully removed from watchlist")
 
-    return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
+    return HttpResponseRedirect(reverse("watchlist"))
 
 
 
@@ -249,6 +249,11 @@ def comment(request , listing_id ):
     else:
         messages.success(request, "Comment was successfully added")
         return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
+
+
+
+def terms(request):
+    return render(request, "auctions/terms.html")
 
 
 

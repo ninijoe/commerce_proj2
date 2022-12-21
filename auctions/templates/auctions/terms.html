@@ -1,0 +1,229 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<style media="screen">
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+
+.text-center {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+}
+
+.card {
+    width: 10rem;
+    height: 25rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    background-color: black;
+    margin-bottom: 35px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+}
+
+.card-body {
+    padding: 10px;
+}
+
+.card:hover{
+    transform: scale(1.12);
+    background-color: red;
+}
+
+.card:hover{
+    transform: scale(1.12);
+    background-color: blue;
+}
+
+.card:hover{
+    transform: scale(1.12);
+}
+
+
+
+.card:hover{
+    transform: scale(1.12);
+    background-color: var(--random-color);
+}
+
+:root {
+    --random-color: red;
+
+    --random-color: ${['red', 'blue', 'yellow', 'green'][Math.floor(Math.random() * 4)]};
+}
+
+.card-title {
+    font-family: 'Courier New', monospace;
+    font-size: 1.0rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 23px;     /* fallback */
+    max-height: 32px;      /* fallback */
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+
+.card-text {
+    font-size: 1.2rem;
+    color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px;     /* fallback */
+    max-height: 32px;      /* fallback */
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.btn {
+    background-color: black;
+    color: #fff;
+    padding: 0px 10px;
+    border-radius: 10px;
+}
+
+
+.btn:hover {
+    background-color: grey;
+    color: #fff;
+    padding: 0px 10px;
+    border-radius: 10px;
+}
+
+h2.text-center {
+        font-size: 2rem;
+        font-weight: bold;
+        color: white;
+        margin-bottom: 1rem;
+    }
+
+select {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 1.2rem;
+        border-radius: 0.25rem;
+        border: 1px solid #ced4da;
+        margin-bottom: 1rem;
+    }
+
+    input[type="submit"][name="listing"] {
+        background-color: skyblue;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+
+    input[type="submit"][name="listing"]:hover{
+        background-color: blue;
+
+    }
+
+
+    a{
+      color: lightblue;
+      text-decoration: none;
+      text-decoration-line: none;
+    }
+
+    a:hover{
+      color: blue;
+      text-decoration: none;
+      text-decoration-line: none;
+
+    }
+
+    ol li{
+      color: white;
+    }
+
+
+
+
+</style>
+
+{%csrf_token%}
+<br>
+
+          <h3 style="color: white;">Terms and Conditions</h3>
+
+          <ol>
+            <li> <h4>Acceptance of Terms of Use and Amendments.</h4> Each time you use or cause access to this web site, you agree to be bound by these Terms of Use, as amended from time to time with or without notice to you. In addition, if you are using a particular service on or through this web site, you will be subject to any rules or guidelines applicable to those services and they shall be incorporated by reference into these Terms of Use. Please see our Privacy Policy, which is incorporated into these Terms of Use by reference.
+            </li> <br>
+            <li> <h4>Our Service.</h4> Our web site and services provided to you on and through our web site on an "AS IS" basis. You agree that the owners of this web site exclusively reserve the right and may, at any time and without notice and any liability to you, modify or discontinue this web site and its services or delete the data you provide, whether temporarily or permanently. We shall have no responsibility or liability for the timeliness, deletion, failure to store, inaccuracy, or improper delivery of any data or information.
+            </li><br>
+            <li> <h4>Privacy Policy.</h4>Registration data and other personally identifiable information that we may collect is subject to the terms of our Privacy Policy.
+            </li><br>
+            <li> <h4>Registration and Password.</h4>You are responsible to maintain the confidentiality of your password and shall be responsible for all uses via your registration and/or login, whether authorized or unauthorized by you. You agree to immediately notify us of any unauthorized use or your registration, user account or password.
+            </li><br>
+            <li> <h4>Your Conduct.</h4>You agree that our web site may expose you to Content that may be objectionable or offensive. We shall not be responsible to you in any way for the Content that appears on this web site nor for any error or omission.
+You explicitly agree, in using this web site or any service provided, that you shall not:
+(a) provide any Content or perform any conduct that may be unlawful, illegal, threatening, harmful, abusive, harassing, stalking, tortious, defamatory, libelous, vulgar, obscene, offensive, objectionable, pornographic, designed to or does interfere or interrupt this web site or any service provided, infected with a virus or other destructive or deleterious programming routine, give rise to civil or criminal liability, or which may violate an applicable local, national or international law;
+(b) impersonate or misrepresent your association with any person or entity, or forge or otherwise seek to conceal or misrepresent the origin of any Content provided by you;
+(c) collect or harvest any data about other users;
+(d) provide or use this web site and any Content or service in any commercial manner or in any manner that would involve junk mail, spam, chain letters, pyramid schemes, or any other form of unauthorized advertising without our prior written consent;
+(e) provide any Content that may give rise to our civil or criminal liability or which may constitute or be considered a violation of any local, national or international law, including but not limited to laws relating to copyright, trademark, patent, or trade secrets.
+            </li><br>
+            <li> <h4>Third Party Services.</h4>Goods and services of third parties may be advertised and/or made available on or through this web site. Representations made regarding products and services provided by third parties are governed by the policies and representations made by these third parties. We shall not be liable for or responsible in any manner for any of your dealings or interaction with third parties.
+            </li><br>
+            <li> <h4>Indemnification.</h4>You agree to indemnify and hold us harmless, our subsidiaries, affiliates, related parties, officers, directors, employees, agents, independent contractors, advertisers, partners, and co-branders from any claim or demand, including reasonable legal fees, that may be made by any third party, that is due to or arising out of your conduct or connection with this web site or service, your violation of this Terms of Use or any other violation of the rights of another person or party.
+            </li><br>
+            <li> <h4>DISCLAIMER OF WARRANTIES.</h4>YOU UNDERSTAND AND AGREE THAT YOUR USE OF THIS WEB SITE AND ANY SERVICES OR CONTENT PROVIDED (THE "SERVICE") IS MADE AVAILABLE AND PROVIDED TO YOU AT YOUR OWN RISK. IT IS PROVIDED TO YOU "AS IS" AND WE EXPRESSLY DISCLAIM ALL WARRANTIES OF ANY KIND, IMPLIED OR EXPRESS, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE MAKE NO WARRANTY, IMPLIED OR EXPRESS, THAT ANY PART OF THE SERVICE WILL BE UNINTERRUPTED, ERROR-FREE, VIRUS-FREE, TIMELY, SECURE, ACCURATE, RELIABLE, OF ANY QUALITY, NOR THAT ANY CONTENT IS SAFE IN ANY MANNER FOR DOWNLOAD. YOU UNDERSTAND AND AGREE THAT NEITHER US NOR ANY PARTICIPANT IN THE SERVICE PROVIDES PROFESSIONAL ADVICE OF ANY KIND AND THAT USE OF SUCH ADVICE OR ANY OTHER INFORMATION IS SOLELY AT YOUR OWN RISK AND WITHOUT OUR LIABILITY OF ANY KIND. Some jurisdictions may not allow disclaimers of implied warranties and the above disclaimer may not apply to you only as it relates to implied warranties.
+            </li><br>
+            <li> <h4>LIMITATION OF LIABILITY.</h4>YOU EXPRESSLY UNDERSTAND AND AGREE THAT WE SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL OR EXEMPLARY DAMAGES, INCLUDING BUT NOT LIMITED TO, DAMAGES FOR LOSS OF PROFITS, GOODWILL, USE, DATA OR OTHER INTANGIBLE LOSS (EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES), RESULTING FROM OR ARISING OUT OF (I) THE USE OF OR THE INABILITY TO USE THE SERVICE, (II) THE COST TO OBTAIN SUBSTITUTE GOODS AND/OR SERVICES RESULTING FROM ANY TRANSACTION ENTERED INTO ON THROUGH THE SERVICE, (III) UNAUTHORIZED ACCESS TO OR ALTERATION OF YOUR DATA TRANSMISSIONS, (IV) STATEMENTS OR CONDUCT OF ANY THIRD PARTY ON THE SERVICE, OR (V) ANY OTHER MATTER RELATING TO THE SERVICE. In some jurisdictions, it is not permitted to limit liability and therefore such limitations may not apply to you.
+            </li><br>
+            <li> <h4>Notification of Copyright Infringement.</h4>If you believe that your property has been used in any way that would be considered copyright infringement or a violation of your intellectual property rights, our copyright agent may be contacted at the following email address: auctionbox00@gmail.com </li><br>
+            <li> <h4>Reservation of Rights.</h4>We reserve all of our rights, including but not limited to any and all copyrights, trademarks, patents, trade secrets, and any other proprietary right that we may have in our web site, its content, and the goods and services that may be provided. The use of our rights and property requires our prior written consent. We are not providing you with any implied or express licenses or rights by making services available to you and you will have no rights to make any commercial uses of our web site or service without our prior written consent.
+            </li><br>
+            <li> <h4>Applicable Law.</h4>You agree that this Terms of Use and any dispute arising out of your use of this web site or our products or services shall be governed by and construed in accordance with local laws where the headquarters of the owner of this web site is located, without regard to its conflict of law provisions. By registering or using this web site and service you consent and submit to the exclusive jurisdiction and venue of the county or city where the headquarters of the owner of this web site is located.
+            </li><br>
+            <li> <h4>Miscellaneous Information.</h4>(i) In the event that this Terms of Use conflicts with any law under which any provision may be held invalid by a court with jurisdiction over the parties, such provision will be interpreted to reflect the original intentions of the parties in accordance with applicable law, and the remainder of this Terms of Use will remain valid and intact; (ii) The failure of either party to assert any right under this Terms of Use shall not be considered a waiver of any that partys right and that right will remain in full force and effect; (iii) You agree that without regard to any statue or contrary law that any claim or cause arising out of this web site or its services must be filed within one (1) year after such claim or cause arose or the claim shall be forever barred; (iv) We may assign our rights and obligations under this Terms of Use and we shall be relieved of any further obligation.
+            </li><br>
+            <li> <h4>Consent</h4>By continuing to browse or otherwise access the web site, you signal acceptance of the terms and disclaimer set out above. If you do not accept any of these terms, leave this Web Site now.</li><br>
+          </ol>
+
+        </div>
+
+
+
+
+        {% endblock %}
+    </body>
+    <br><br><br>
+
+
+    <div class="footer-section">
+      <section>
+        <footer style="text-align: center; color: white; font-family: 'Courier New', monospace;">© Copyright Ovion Technologies</footer>
+        <ul>
+          <li> <a href="{% url 'terms' %}">Terms </a> </li>
+          <li> <a href="#">Privacy </a> </li>
+          <li> <a href="#">faq </a> </li>
+        </ul>
+        <style media="screen">
+           ul{
+             flex: auto;
+             flex-direction: row;
+           }
+        </style>
+      </section>
+    </div>
+</html>
