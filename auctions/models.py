@@ -60,6 +60,9 @@ class AuctionListing(models.Model):
     def get_listing_category(self):
         return self.category
 
+    def get_listing_watchlist(self):
+        return self.watchlist
+
 
     def get_listing_seller_id(self):
         return self.seller_id
@@ -73,7 +76,7 @@ class AuctionListing(models.Model):
 class AuctionListingForm(forms.ModelForm):
     class Meta:
         model = AuctionListing
-        fields = ['title', 'description', 'imageUrl', 'startingBid', 'isActive', 'category', 'seller_id']
+        fields = ['title', 'description', 'imageUrl', 'startingBid', 'isActive', 'category', 'watchlist', 'seller_id']
 
 
 

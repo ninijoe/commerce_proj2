@@ -107,6 +107,7 @@ h2.text-center {
   top: -40px;
   left: 77px;
   animation: glow 1s ease-in-out infinite alternate;
+
 }
 
 .call-to-action-message {
@@ -115,6 +116,7 @@ h2.text-center {
   position: relative;
   top: -40px;
   left: 77px;
+
 
 }
 
@@ -129,14 +131,7 @@ h2.text-center {
 }
 
 
-button{
-  width: 80%;
-  padding: 10px;
-  font-size: 1.2rem;
-  border-radius: 5px;
-  background-color:
-  lightblue; color: black;
-}
+
 
 .input-area{
   width: 80%;
@@ -149,6 +144,8 @@ button{
 
 {%csrf_token%}
 
+
+
 {% if messages %}
   {% for message in messages %}
   <div class="alert alert-success" role="alert">{{ message }}</div>
@@ -159,7 +156,7 @@ button{
 
 <div class="card-body" style="text-align: center; position: relative; display: flex;">
   {%csrf_token%}
-  <img class= "card-img-top" src="{{imageUrl}}" alt="imageurl" style="width:280px; height:365px; border-radius: 10px; margin: 0 auto; margin-top: -20px; float: left; margin-left:-10px;">
+  <img class= "card-img-top" src="{{imageUrl}}" alt="imageurl" style="width:286px; height:371px; border-radius: 10px; margin: 0 auto; margin-top: -20px; float: left; margin-left:-10px;">
 
   <div class="activity-AbstractUser">
 
@@ -180,18 +177,24 @@ button{
         <input type="text" class="input-area" name="bid" placeholder=" enter your bid" style=" padding: 5px; font-size: 1.0rem; border-radius: 5px;">
         <button type="submit" class="btn btn-success" name="button">Bid</button>
       </form>
-      <form action="{% url 'remove_bid' listing_id %}" method="POST" style="margin-top: 10px;">
-        {%csrf_token%}
-        <input type="hidden" name="listing_id" value="{{listing.id}}">
-        <button type="submit" class="btn btn-success" name="button" style ="background-color: red;">remove bid</button>
-      </form>
+
+
+
+
+
+
+
+
+
+
+
     </div>
   </div>
 
 </div>
 <br><br>
 <p class="" style="font-size:1.0rem;color:white; font-weight:bold;">{{description}}</p>
-<br><br><br><br><br>
+<br><br>
 
 
 <div class="addto-bid">
@@ -201,13 +204,42 @@ button{
 
 
 
+      {%if not isListingInWatchList%}
+        <form action= "{% url 'add_to_watchlist' listing_id %}" method="POST" style= "justify-content: center; position: relative; text-align: center;  top: -25px; ">
+          {%csrf_token%}
+          <input type="hidden" name="listing_id" value="{{listing.id}}">
+          <button type="submit" style="width: 190px; background-color: green; text-align: center; justify-content: center;" class="btn btn-success" name="button" ">add to watchlist</button>
+        </form>
+          <div class="call-to-action-message" style= " justify-content: center; position: relative; top: -20px; left: 2px; text-align: center; ">
+            <p>listing is not in Watchlist</p>
+      </div>
+
+      {%else%}
+
+
+
+        <form action= "{% url 'remove_from_watchlist' listing_id %}" method="POST" style= "justify-content: center; position: relative; text-align: center;  top: -25px;">
+          {%csrf_token%}
+          <input type="hidden" name="listing_id" value="{{listing.id}}">
+          <button type="submit" style="width: 190px; background-color: red;" class="btn btn-success" name="button" ">remove from watchlist</button>
+        </form>
+
+          <div class="success-message" style= " justify-content: center; position: relative; top: -20px; left: 2px; text-align: center; ">
+            <p>listing is in Watchlist</p>
+          </div>
+
+      {% endif %}
+
+      <form action="{% url 'remove_bid' listing_id %}" method="POST" style="margin-top: 20px; margin-left: 140px; margin-bottom: 180px;">
+        {%csrf_token%}
+        <input type="hidden" name="listing_id" value="{{listing.id}}">
+        <button type="submit" style="width: 190px; background-color: red;" class="btn btn-success" name="button" style ="background-color: red; margin-left: 140px;text-align: center; justify-content: center; justify-content: center; text-align: center;">remove bid</button>
+      </form>
 
 
 
 
-
-
-      <br><br><br><br>
+      <br><br>
     </div>
   </div>
 </div>
@@ -229,6 +261,16 @@ button{
         <button type="submit" class="btn btn-success" name="button" style=" width: 18%; padding: 7px; font-size: 1.2rem; border-radius: 5px; margin-left:5px; background-color: lightblue; color: black; ">
           submit
         </button>
+        <style >
+          button{
+            width: 80%;
+            padding: 10px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            background-color: lightblue;
+            color: black;
+          }
+        </style>
     </form>
 
 

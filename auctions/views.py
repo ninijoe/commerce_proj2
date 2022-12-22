@@ -35,7 +35,11 @@ def categories(request):
 def listing(request, listing_id):
     listing = AuctionListing.objects.get(pk=listing_id)
 
-    isListingInWatchList = listing in listing.watchlist.all()
+    user = request.user
+
+    watchlist = listing.watchlist.all()
+
+    isListingInWatchList = listing in user.watchlist.all()
 
     all_Comments = Comment.objects.filter(auction_listing = listing)
 
@@ -50,6 +54,7 @@ def listing(request, listing_id):
         'isListingInWatchList': isListingInWatchList,
         'listing_id': listing_id,
         'listing': listing,
+        'watchlist': watchlist,
         'all_Comments': all_Comments,
 
 
@@ -128,7 +133,7 @@ def remove_bid(request, listing_id):
         except ValueError:
             raise ValueError("Bid could not be removed").format(user)
         except Bid.DoesNotExist:
-            messages.error(request, "You cannot remove any more bids since you are not the highest bidder")
+            messages.error(request, "You cannot remove any more bids")
             return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
     else:
         messages.error(request, "You are not the highest bidder and cannot remove your bid.")
@@ -219,7 +224,7 @@ def remove_from_watchlist(request , listing_id ):
     listing.watchlist.remove(user)
     messages.error(request, "Listing was successfully removed from watchlist")
 
-    return HttpResponseRedirect(reverse("watchlist"))
+    return HttpResponseRedirect(reverse("listing" , args=(listing_id, )))
 
 
 
