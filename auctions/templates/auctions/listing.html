@@ -154,16 +154,24 @@ h2.text-center {
 <h2 class="text-center" style="color: white; position: sticky; font-family: 'Courier New', monospace;"> {{title}}</h2>
 <br>
 
+{%if user == seller %}
+<p style = "color:white;">Posted by you</p>
+{%else%}
+<p style = "color:white;">Posted by {{seller}}</p>
+{% endif %}
+
+
 <div class="card-body" style="text-align: center; position: relative; display: flex;">
   {%csrf_token%}
+
   <img class= "card-img-top" src="{{imageUrl}}" alt="imageurl" style="width:286px; height:371px; border-radius: 10px; margin: 0 auto; margin-top: -20px; float: left; margin-left:-10px;">
 
   <div class="activity-AbstractUser">
 
     {% if isActive %}
-    <p class="activity-AbstractUser__active" style="font-size:1.0rem;color:green; font-weight:bold;"><strong>ACTIVE</strong> {{isActive}} </p>
+    <p class="activity-AbstractUser__active" style="font-size:1.0rem;color:green; font-weight:bold;">AVAILABLE</p>
     {%else%}
-    <p class="activity-AbstractUser__inactive" style="font-size:1.0rem;color:red; font-weight:bold;"><strong>ACTIVE</strong>{{isActive}} </p>
+    <p class="activity-AbstractUser__inactive" style="font-size:1.0rem;color:red; font-weight:bold;">Not Available</p>
     {% endif %}
 
 
@@ -211,7 +219,7 @@ h2.text-center {
           <button type="submit" style="width: 190px; background-color: green; text-align: center; justify-content: center;" class="btn btn-success" name="button" ">add to watchlist</button>
         </form>
           <div class="call-to-action-message" style= " justify-content: center; position: relative; top: -20px; left: 2px; text-align: center; ">
-            <p>listing is not in Watchlist</p>
+            <p> this listing is not in your Watchlist</p>
       </div>
 
       {%else%}
@@ -225,12 +233,12 @@ h2.text-center {
         </form>
 
           <div class="success-message" style= " justify-content: center; position: relative; top: -20px; left: 2px; text-align: center; ">
-            <p>listing is in Watchlist</p>
+            <p> this listing is in your Watchlist</p>
           </div>
 
       {% endif %}
 
-      <form action="{% url 'remove_bid' listing_id %}" method="POST" style="margin-top: 20px; margin-left: 140px; margin-bottom: 180px;">
+      <form action="{% url 'remove_bid' listing_id %}" method="POST" style="margin-top: 20px; margin-left: 145px; margin-bottom: 180px;">
         {%csrf_token%}
         <input type="hidden" name="listing_id" value="{{listing.id}}">
         <button type="submit" style="width: 190px; background-color: red;" class="btn btn-success" name="button" style ="background-color: red; margin-left: 140px;text-align: center; justify-content: center; justify-content: center; text-align: center;">remove bid</button>

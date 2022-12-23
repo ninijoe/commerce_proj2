@@ -1,0 +1,239 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<style media="screen">
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+
+.text-center {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+}
+
+.card {
+    width: 10rem;
+    height: 25rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    background-color: black;
+    margin-bottom: 35px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+}
+
+.card-body {
+    padding: 10px;
+}
+
+.card:hover{
+    transform: scale(1.12);
+    background-color: red;
+}
+
+.card:hover{
+    transform: scale(1.12);
+    background-color: blue;
+}
+
+.card:hover{
+    transform: scale(1.12);
+}
+
+
+
+.card:hover{
+    transform: scale(1.12);
+    background-color: var(--random-color);
+}
+
+:root {
+    --random-color: red;
+
+    --random-color: ${['red', 'blue', 'yellow', 'green'][Math.floor(Math.random() * 4)]};
+}
+
+.card-title {
+    font-family: 'Courier New', monospace;
+    font-size: 1.0rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 23px;     /* fallback */
+    max-height: 32px;      /* fallback */
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+
+.card-text {
+    font-size: 1.2rem;
+    color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px;     /* fallback */
+    max-height: 32px;      /* fallback */
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.btn {
+    background-color: black;
+    color: #fff;
+    padding: 0px 10px;
+    border-radius: 10px;
+}
+
+
+.btn:hover {
+    background-color: grey;
+    color: #fff;
+    padding: 0px 10px;
+    border-radius: 10px;
+}
+
+h2.text-center {
+        font-size: 2rem;
+        font-weight: bold;
+        color: white;
+        margin-bottom: 1rem;
+    }
+
+select {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 1.2rem;
+        border-radius: 0.25rem;
+        border: 1px solid #ced4da;
+        margin-bottom: 1rem;
+    }
+
+    input[type="submit"][name="listing"] {
+        background-color: skyblue;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+
+    input[type="submit"][name="listing"]:hover{
+        background-color: blue;
+
+    }
+
+
+    a{
+      color: lightblue;
+      text-decoration: none;
+      text-decoration-line: none;
+    }
+
+    a:hover{
+      color: blue;
+      text-decoration: none;
+      text-decoration-line: none;
+
+    }
+
+    ol li{
+      color: white;
+    }
+
+
+
+
+</style>
+
+{%csrf_token%}
+<br>
+
+
+
+          <ul>
+            <li> <h4>AuctionBox (founded in Canada) is an online social market site where users can auction/sell as well as
+               advertise anything ranging from electronics, movies, songs, books etc and engage with sellers as well as buyers of products and services.
+               Through carefully curated listings, and a safe center for buyer/seller interactions, we aim to enhance the advent of trade through social technology.
+               <br>
+               AuctionBox is the best site to advertise goods for sale, auction of antiques, drive traffic to other online sites, curate a portfolio for sales
+               and generate revenue through leads as well as customer purchases and interaction.
+               <br>
+               AuctionBox being a local company employs local residents of the Nanaimo region, as a means to generate revenue for the city as well as promote the
+               importance of growing local businesses in Canada.
+            </li> <br>
+            <li> <h4>OUR GENESIS: AuctionBox is a product created by a computer science major at the Vancouver Island University. It began
+              as a <a href="https://cs50.harvard.edu/web/2020/projects/2/commerce/">Harvard CS50 assignment</a> and transitioned into an avenue
+              for students to look up, buy and sell textbooks at school as it proved difficult to find the right sources online for things one may desire locally.
+              The site is designed to favour local trade and barter, so users can reach sellers and customers within their cities and geopolitical locations easily.
+              <br>
+              We are happy to serve the local populace of Nanaimo and look forward to growing to other cities and provinces around Canada and soon, globally.
+              The students are residents here in Nanaimo and works hard everyday to provide the best service to all users.
+            </li> <br>
+
+            <li> <h4>OUR VISION: To become the number one online social marketplace in the world.
+            </li> <br>
+            <li> <h4>OUR MISSION: Bring people from around the globe together to our safe, secure and reliable marketplace to sell, buy and advertise goods and services with a main focus
+              of serving local businesses and residents.
+            </li> <br>
+            <li> <h4>WHY SUPPORT US: because like you, we are a local business ourselves and serve top priority local residents. We are a startup technology company and want to create an industry
+              in Nanaimo where technology is at the forefront. We believe that this would serve the city great reputation as well as taxes.
+              Investing in us is investing in local businesses.
+            </li> <br>
+            <li> <h4>CONTACT US: Email <a href="mailto:Josephephraim68@yahoo.com"> Josephephraim68@yahoo.com</a>  with any questions, complaints or suggestions you may have to make the site experience better for you.
+            </li> <br>
+          </ul>
+
+          <style >
+            ul li{
+              color: white;
+              list-style-type: none;
+
+            }
+
+            a:hover{
+              color:pink;
+            }
+          </style>
+
+        </div>
+
+
+
+
+        {% endblock %}
+    </body>
+    <br><br><br>
+
+
+    <div class="footer-section">
+      <section>
+        <footer style="text-align: center; color: white; font-family: 'Courier New', monospace;">© Copyright Ovion Technologies</footer>
+        <ul>
+          <li> <a href="{% url 'terms' %}">Terms </a> </li>
+          <li> <a href="#">Privacy </a> </li>
+          <li> <a href="#">faq </a> </li>
+        </ul>
+        <style media="screen">
+           ul{
+             flex: auto;
+             flex-direction: row;
+           }
+        </style>
+      </section>
+    </div>
+</html>

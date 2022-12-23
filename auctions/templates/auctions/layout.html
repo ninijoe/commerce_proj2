@@ -116,7 +116,7 @@
     }
 
     .nav li a:hover {
-        background-color: #111;
+        background-color: blue;
 
     }
 
@@ -208,10 +208,11 @@
                   <li class="nav-item-register">
                       <a class="nav-link" href="{% url 'register' %}">Register</a>
                   </li>
+
               {% endif %}
           </ul>
           <hr>
-
+          
         </div>
 
 
@@ -227,9 +228,10 @@
         <footer style="text-align: center; color: white; font-family: 'Courier New', monospace;">© 2023 Copyright AuctionBox </footer>
 
         <div class="footer-links">
+          <a href="{% url 'about' %}">About </a>
           <a href="{% url 'terms' %}">Terms </a>
           <a href="#">Privacy </a>
-          <a href="#">faq </a>
+          <a href="#">FAQ </a>
         </div>
 
 

@@ -31,13 +31,15 @@ def categories(request):
 
 
 
-
+@login_required(login_url='login')
 def listing(request, listing_id):
     listing = AuctionListing.objects.get(pk=listing_id)
 
+    seller = listing.seller_id
+
     user = request.user
 
-    watchlist = listing.watchlist.all()
+    watchlist = listing.watchlist
 
     isListingInWatchList = listing in user.watchlist.all()
 
@@ -56,6 +58,8 @@ def listing(request, listing_id):
         'listing': listing,
         'watchlist': watchlist,
         'all_Comments': all_Comments,
+        'seller': seller,
+        'user': user
 
 
     }
@@ -127,13 +131,13 @@ def remove_bid(request, listing_id):
             else:
                 listing.startingBid = listing.startingBid
             listing.save()
-            messages.success(request, "Your bid has been removed.")
+            messages.success(request, "Your bid has been removed. Note: the current bid may or may not change ")
 
             return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
         except ValueError:
             raise ValueError("Bid could not be removed").format(user)
         except Bid.DoesNotExist:
-            messages.error(request, "You cannot remove any more bids")
+            messages.error(request, "You have no bid on this item")
             return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
     else:
         messages.error(request, "You are not the highest bidder and cannot remove your bid.")
@@ -208,7 +212,7 @@ def add_to_watchlist(request , listing_id ):
     user = request.user
     listing.watchlist.add(user)
     messages.error(request, "Listing was successfully added to watchlist")
-    return HttpResponseRedirect(reverse("watchlist"))
+    return HttpResponseRedirect(reverse("listing" , args=(listing_id, )))
 
 
 
@@ -259,6 +263,10 @@ def comment(request , listing_id ):
 
 def terms(request):
     return render(request, "auctions/terms.html")
+
+
+def about(request):
+    return render(request, "auctions/about.html")
 
 
 
