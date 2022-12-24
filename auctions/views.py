@@ -17,7 +17,7 @@ from .models import User, Category, Bid, AuctionListing, AuctionListingForm, Com
 
 
 def index(request):
-    listings = AuctionListing.objects.filter(isActive=True)
+    listings = AuctionListing.objects.all()
     return render(request, 'auctions/index.html', {'listings': listings})
 
 
@@ -39,6 +39,8 @@ def listing(request, listing_id):
 
     user = request.user
 
+    is_user_owner = (user.username == seller.username)
+
     watchlist = listing.watchlist
 
     isListingInWatchList = listing in user.watchlist.all()
@@ -59,7 +61,51 @@ def listing(request, listing_id):
         'watchlist': watchlist,
         'all_Comments': all_Comments,
         'seller': seller,
-        'user': user
+        'user': user,
+        'is_user_owner': is_user_owner
+
+
+    }
+    return render(request, 'auctions/listing.html', context)
+
+
+@login_required(login_url='login')
+def close_listing(request, listing_id):
+    listing = AuctionListing.objects.get(pk=listing_id)
+
+    user = request.user
+
+    seller = listing.seller_id
+
+    is_user_owner = (user.username == seller.username)
+
+    watchlist = listing.watchlist
+
+    isListingInWatchList = listing in user.watchlist.all()
+
+    is_user_owner = (user.username == seller.username)
+
+    all_Comments = Comment.objects.filter(auction_listing = listing)
+
+    listing.isActive = False
+    listing.save()
+    context = {
+        'title': listing.get_listing_title(),
+        'description': listing.get_listing_description(),
+        'imageUrl': listing.get_listing_image(),
+        'startingBid': listing.get_listing_startingBid(),
+        'isActive': listing.get_listing_isActive(),
+        'category': listing.get_listing_category(),
+        'isListingInWatchList': isListingInWatchList,
+        'listing_id': listing_id,
+        'listing': listing,
+        'watchlist': watchlist,
+        'all_Comments': all_Comments,
+        'seller': seller,
+        'user': user,
+        'is_user_owner': is_user_owner,
+        'update': True,
+        'is_user_owner': is_user_owner
 
 
     }
@@ -67,14 +113,22 @@ def listing(request, listing_id):
 
 
 
-
-
-
 @login_required(login_url='login')
 def add_bid(request, listing_id):
     listing = AuctionListing.objects.get(pk=listing_id)
+
+    user = request.user
+
     seller = listing.seller_id
-    bidder = request.user
+
+    is_user_owner = (user.username == seller.username)
+
+    watchlist = listing.watchlist
+
+    isListingInWatchList = listing in user.watchlist.all()
+
+
+
     if request.method == 'POST':
         form = BidForm(request.POST)
         if form.is_valid():
@@ -83,7 +137,7 @@ def add_bid(request, listing_id):
                 try:
                     listing.startingBid = bid
                     listing.save()
-                    bid_obj = Bid.objects.create(bid=bid, bidder=bidder, auction_listing=listing)
+                    bid_obj = Bid.objects.create(bid=bid, bidder=user, auction_listing=listing)
                     bid_obj.save()
                     messages.error(request, "Congratulations! You are currently the highest bidder. " + str(seller.username.capitalize()) + " will be notified you placed a new bid.")
                     return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
@@ -96,7 +150,7 @@ def add_bid(request, listing_id):
     else:
 
         form = BidForm()
-
+    bidder = bid_obj.get(bidder)
     context = {
         'title': listing.get_listing_title(),
         'description': listing.get_listing_description(),
@@ -107,7 +161,10 @@ def add_bid(request, listing_id):
         'listing_id': listing_id,
         'listing': listing,
         'form': form,
-        'bidder': bidder
+        'user': user,
+        'bidder': bidder,
+        'is_user_owner': is_user_owner,
+        'seller': seller
     }
     messages.success(request, "Congratulations! You are currently the highest bidder")
     return render(request, 'auctions/listing.html', context)
