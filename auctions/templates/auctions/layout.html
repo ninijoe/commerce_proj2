@@ -47,7 +47,7 @@
           margin: 0.5em 0;
           line-height: 1.5em;
           text-shadow: 1px 1px 1px #000;
-          margin-top: 45px;
+          margin-top: -25px;
       }
 
       .nav {
@@ -121,10 +121,10 @@
     }
 
     .logo img {
-      width: 6%;
+      width: 240px;
       max-width: 100%;
-      height: auto;
-      margin-left: 20px;
+      height: 230px;
+
     }
 
     .logo {
@@ -140,6 +140,7 @@
 
 
     .footer-section{
+      min-height: 100vh;
       -webkit-text-size-adjust: 100%;
       font-family: Open Sans, Helvetica, Arial, sans;
       color: #333333;
@@ -149,9 +150,10 @@
       background-color: #212121f2;
       position: relative;
       background-color: transparent;
-      margin-top: 100px;
+
       font-size: 1.1em;
     }
+
 
 
 
@@ -165,7 +167,7 @@
 {% if user.is_authenticated %}
         <div class="body">
           <div class="logo">
-            <img src="https://raw.githubusercontent.com/ninijoe/wolfe/main/images/anotherwolfe.png" alt="logo">
+            <a style="margin-left: -40px;" href="{%url 'index'%}"><img src="{% static 'auctions/logo.png' %}" alt="logo"></a>
             <strong> welcome {{ user.username }}</strong>
           </div>
 
@@ -195,7 +197,8 @@
                   </li>
               {% else %}
                   <div class="logo">
-                    <img src="https://raw.githubusercontent.com/ninijoe/wolfe/main/images/anotherwolfe.png" alt="logo">
+                    <a href="{%url 'index'%}"><img src="{% static 'auctions/logo.png' %}" alt="logo"></a>
+
                   </div>
                   <a href="{% url 'index' %}" class ="banner" style="text-decoration: none;">
                     <h1 style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.8em; font-weight: bold; text-align: center; padding: 10px; background-color: red; border-radius: 5px;">auctionbox</h1>
@@ -212,7 +215,7 @@
               {% endif %}
           </ul>
           <hr>
-          
+
         </div>
 
 
@@ -220,7 +223,6 @@
         {% block body %}
         {% endblock %}
     </body>
-    <br><br><br>
 
 
     <div class="footer-section">

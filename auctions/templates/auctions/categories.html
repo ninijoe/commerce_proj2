@@ -5,16 +5,15 @@
 
   .row {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: none;
     justify-content: center;
   }
 
   .card {
       border: 1px solid #ccc;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
       margin-bottom: 20px;
-      width: 10rem;
-      height: 3rem;
+
   }
 
   h2{
@@ -24,7 +23,6 @@
 .category {
   display: flex;
   justify-content: center;
-  align-items: center;
   font-size: 1.2rem;
   font-weight: bold;
   padding: 10px;
@@ -35,7 +33,7 @@
 }
 
 .category-name span{
-    font-size: 1.2rem;
+    
     font-weight: bold;
     text-decoration: none;
     text-decoration-line: none;
@@ -67,13 +65,14 @@ a:hover {
 </style>
 {%csrf_token%}
 {% if user.is_authenticated %}
-<h2 class="text-center">Categories</h2>
+<h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">Categories</h2><br>
+
 
 <div>
     {%csrf_token%}
     {% for category in categories %}
-    <div class="row mx-3">
-      <div class="card mx-3" style="width: 10rem; height: 3rem;">
+    <div class="row mx-7">
+      <div class="card mx-7" style="width: 10rem; height: 3rem;">
         <a href="{% url 'category_listings' category.id %}">
           <div class="category">
 
