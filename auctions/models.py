@@ -37,6 +37,7 @@ class AuctionListing(models.Model):
     category= models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, related_name="category")
     watchlist = models.ManyToManyField(User, blank = True, related_name= "watchlist" )
     seller_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False, related_name="seller")
+    created = models.DateTimeField(default = datetime.datetime.now)
 
     def __str__(self):
         return self.title
@@ -68,6 +69,8 @@ class AuctionListing(models.Model):
         return self.seller_id
 
 
+    def created(self):
+        return self.created
 
 
 
@@ -120,7 +123,8 @@ class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name="author", default=None)
     auction_listing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE, blank=True, related_name="auction_listing")
     comment = models.TextField(max_length=200 , default=None)
+    created = models.DateTimeField(default = datetime.datetime.now)
 
 
     def __str__(self):
-        return f" {self.author} dropped a comment on {self.auction_listing} "
+        return f" on {self.created}, {self.author} dropped a comment on {self.auction_listing} "

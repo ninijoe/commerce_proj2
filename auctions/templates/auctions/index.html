@@ -194,7 +194,7 @@ select {
     <div class="card-body" style="text-align: center; position: relative;">
       {%csrf_token%}
       <img class= "card-img-top" src="{{listing.imageUrl}}" alt="imageurl" style="width:130px; height:175px; border-radius: 10px; margin: 0 auto;">
-      <h5 class="card-title" >{{listing.title}}</h5>
+      <h5 class="card-title" style="font-weight:bold; color:white; font-size:">{{listing.title}}</h5>
       <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#description_{{listing.id}}" style="width: 50px; height: 40px;">
         <span class="collapse-icon"><h3>˯</h3></span>
       </button>
@@ -218,7 +218,7 @@ select {
     <div class="card-body" style="text-align: center; position: relative;">
       {%csrf_token%}
       <img class= "card-img-top" src="{{listing.imageUrl}}" alt="imageurl" style="width:130px; height:175px; border-radius: 10px; margin: 0 auto;">
-      <h6 class="card-title" style="font-weight:bold; color:white; font-size: 0.4px;">{{listing.title}}</h6>
+      <h5 class="card-title" style="font-weight:bold; color:white; font-size:">{{listing.title}}</h5>
       <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#description_{{listing.id}}" style="width: 50px; height: 40px;">
         <span class="collapse-icon"><h3>˯</h3></span>
       </button>
@@ -239,7 +239,6 @@ select {
 {%endif%}
 {% endfor %}
 </div>
-
 
 
 

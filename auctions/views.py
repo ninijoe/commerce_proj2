@@ -35,6 +35,8 @@ def categories(request):
 def listing(request, listing_id):
     listing = AuctionListing.objects.get(pk=listing_id)
 
+    created = listing.created
+
     seller = listing.seller_id
 
     user = request.user
@@ -48,47 +50,6 @@ def listing(request, listing_id):
     all_Comments = Comment.objects.filter(auction_listing = listing)
 
 
-    context = {
-        'title': listing.get_listing_title(),
-        'description': listing.get_listing_description(),
-        'imageUrl': listing.get_listing_image(),
-        'startingBid': listing.get_listing_startingBid(),
-        'isActive': listing.get_listing_isActive(),
-        'category': listing.get_listing_category(),
-        'isListingInWatchList': isListingInWatchList,
-        'listing_id': listing_id,
-        'listing': listing,
-        'watchlist': watchlist,
-        'all_Comments': all_Comments,
-        'seller': seller,
-        'user': user,
-        'is_user_owner': is_user_owner
-
-
-    }
-    return render(request, 'auctions/listing.html', context)
-
-
-@login_required(login_url='login')
-def close_listing(request, listing_id):
-    listing = AuctionListing.objects.get(pk=listing_id)
-
-    user = request.user
-
-    seller = listing.seller_id
-
-    is_user_owner = (user.username == seller.username)
-
-    watchlist = listing.watchlist
-
-    isListingInWatchList = listing in user.watchlist.all()
-
-    is_user_owner = (user.username == seller.username)
-
-    all_Comments = Comment.objects.filter(auction_listing = listing)
-
-    listing.isActive = False
-    listing.save()
     context = {
         'title': listing.get_listing_title(),
         'description': listing.get_listing_description(),
@@ -104,12 +65,48 @@ def close_listing(request, listing_id):
         'seller': seller,
         'user': user,
         'is_user_owner': is_user_owner,
-        'update': True,
-        'is_user_owner': is_user_owner
+        'created': created
 
 
     }
     return render(request, 'auctions/listing.html', context)
+
+
+@login_required(login_url='login')
+def close_listing(request, listing_id):
+
+    if request.method == POST:
+
+        user = request.user
+
+        listing = AuctionListing.objects.get(pk=listing_id)
+
+        bid = Bid.objects.get(pk=listing)
+
+        seller = listing.seller_id
+
+        user_is_owner = (user.username == seller.username)
+
+        bidder = bid.bidder
+
+        user_is_bidder = (bidder.username == user.username)
+
+        listing.isActive = False
+
+        listing.save()
+
+        context = {
+
+            'bidder': bidder,
+            'listing_id': listing_id,
+            'listing': listing,
+            'seller': seller,
+            'user': user,
+            'user_is_owner': user_is_owner,
+            'user_is_bidder': user_is_bidder
+
+        }
+        return render(request, 'auctions/listing.html', context)
 
 
 
@@ -118,6 +115,8 @@ def add_bid(request, listing_id):
     listing = AuctionListing.objects.get(pk=listing_id)
 
     user = request.user
+
+    bidder = user.username
 
     seller = listing.seller_id
 
@@ -150,7 +149,8 @@ def add_bid(request, listing_id):
     else:
 
         form = BidForm()
-    bidder = bid_obj.get(bidder)
+
+
     context = {
         'title': listing.get_listing_title(),
         'description': listing.get_listing_description(),

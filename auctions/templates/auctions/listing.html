@@ -154,7 +154,7 @@ h2.text-center {
 <h2 class="text-center" style="color: white; position: sticky; font-family: 'Courier New', monospace;"> {{title}}</h2>
 <br>
 
-{%if user == seller %}
+{%if user_is_owner %}
       {%if isActive%}
       <form action= "{% url 'close_listing' listing_id %}" method="POST" style= "justify-content: center; position: relative; text-align: center;  top: -25px; ">
         {%csrf_token%}
@@ -166,23 +166,20 @@ h2.text-center {
             <div class="alert alert-success" role="alert">Congratulations! Your auction is closed</div>
       {% endif %}
 
-{% else %}
+{%else %}
+      {%if not isActive%}
 
-{%if isActive%}
-      <form action= "{% url 'close_listing' listing_id %}" method="POST" style= "justify-content: center; position: relative; text-align: center;  top: -25px; ">
-        {%csrf_token%}
-        <input type="hidden" name="listing_id" value="{{listing.id}}">
-        <button type="submit" style="width: 190px; background-color: red; text-align: center; justify-content: center;" class="btn btn-success" name="button" ">close auction</button>
-      </form>
+          <div class="alert alert-success" role="alert">Congratulations! You won the auction</div>
 
-      {%else%}
-      <div class="alert alert-success" role="alert">Congratulations! You won the auction</div>
-{% endif %}
-
-
-
+      {%endif%}
 
 {% endif %}
+
+
+
+
+
+
 
 
 
@@ -352,10 +349,11 @@ h2.text-center {
 {% for comment in all_Comments reversed %}
 
   <li class="list-group-item" style=" margin-left:0px;  width: 100%; padding: 15px; border-radius: 20px; border: 0px solid black; font-size: 16px; background-color: #212121f2; background-color: transparent; color: white; outline: none;">
-    <h6>{{comment.comment}} <hr style="width=100%; border: 0.1px solid white;"> <p>{{comment.author}}</p></h6>
+    <h6>{{comment.comment}} <hr style="width=100%; border: 0.1px solid white; color=white;"></h6>
+    {{comment.author}} <p style ="color: pink;">{{comment.created}}</p>
     <style>
-     li p{
-        color: pink;
+     {
+        color: lightblue;
 
       }
     </style>
