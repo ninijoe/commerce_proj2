@@ -349,14 +349,11 @@ h2.text-center {
 {% for comment in all_Comments reversed %}
 
   <li class="list-group-item" style=" margin-left:0px;  width: 100%; padding: 15px; border-radius: 20px; border: 0px solid black; font-size: 16px; background-color: #212121f2; background-color: transparent; color: white; outline: none;">
-    <h6>{{comment.comment}} <hr style="width=100%; border: 0.1px solid white; color=white;"></h6>
-    {{comment.author}} <p style ="color: pink;">{{comment.created}}</p>
-    <style>
-     {
-        color: lightblue;
+    <h5>{{comment.comment}} </h5>
+    <hr style="width=100%; border: 0.1px solid white; color=white;">
+    <h6 style = "color: lightblue;">{{comment.author}} </h6>
+    <p style ="color: pink; justify-content: right; text-align: right; margin-top: -26px;">{{comment.created}}</p>
 
-      }
-    </style>
   </li>
   <br>
 
