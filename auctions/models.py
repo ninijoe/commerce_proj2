@@ -15,7 +15,7 @@ class User(AbstractUser):
 
 class Category(models.Model):
     categoryName = models.CharField(max_length=50)
-    
+
 
 
     def __str__(self):
@@ -38,7 +38,7 @@ class AuctionListing(models.Model):
     isActive= models.BooleanField(default=True)
     category= models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, related_name="category")
     watchlist = models.ManyToManyField(User, blank = True, related_name= "watchlist" )
-    seller_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False, related_name="seller")
+    seller_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False, default=None , related_name="seller")
     created = models.DateTimeField(default = timezone.now)
 
     def __str__(self):

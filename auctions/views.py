@@ -95,29 +95,31 @@ def close_listing(request, listing_id):
 
         listing = AuctionListing.objects.get(pk=listing_id)
 
-        bid = Bid.objects.get(pk=listing)
-
         seller = listing.seller_id
 
         user_is_owner = (user.username == seller.username)
 
-        bidder = bid.bidder
+        bid = Bid.objects.filter(auction_listing=listing)
 
-        user_is_bidder = (bidder.username == user.username)
+        #bidder = bid.bidder
+
+        #user_is_bidder = (bidder.username == user.username)
 
         listing.isActive = False
 
         listing.save()
 
+
+
         context = {
 
-            'bidder': bidder,
+            #'bidder': bidder,
             'listing_id': listing_id,
             'listing': listing,
             'seller': seller,
             'user': user,
             'user_is_owner': user_is_owner,
-            'user_is_bidder': user_is_bidder
+            #'user_is_bidder': user_is_bidder
 
         }
         return render(request, 'auctions/listing.html', context)
