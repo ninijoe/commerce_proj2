@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django import forms
 import datetime
+from django.utils import timezone
 
 
 
@@ -14,6 +15,7 @@ class User(AbstractUser):
 
 class Category(models.Model):
     categoryName = models.CharField(max_length=50)
+    
 
 
     def __str__(self):
@@ -37,7 +39,7 @@ class AuctionListing(models.Model):
     category= models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, related_name="category")
     watchlist = models.ManyToManyField(User, blank = True, related_name= "watchlist" )
     seller_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False, related_name="seller")
-    created = models.DateTimeField(default = datetime.datetime.now)
+    created = models.DateTimeField(default = timezone.now)
 
     def __str__(self):
         return self.title

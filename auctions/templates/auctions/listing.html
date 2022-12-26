@@ -342,12 +342,21 @@ h2.text-center {
 
 
 </div>
-<br>
+<br><br><br><br>
 
 <ul class="list-group">
   {%csrf_token%}
 {% for comment in all_Comments reversed %}
+{%if comment.author == user%}
+<li class="list-group-item" style=" margin-left:0px;  width: 100%; padding: 15px; border-radius: 20px; border: 0px solid black; font-size: 16px; background-color: #212121f2; background-color: transparent; color: white; outline: none;">
+  <h5>{{comment.comment}} </h5>
+  <hr style="width=100%; border: 0.1px solid white; color=white;">
+  <h6 style = "color: lightblue;">you</h6>
+  <p style ="color: pink; justify-content: right; text-align: right; margin-top: -26px;">{{comment.created}}</p>
 
+</li>
+<br>
+{%else%}
   <li class="list-group-item" style=" margin-left:0px;  width: 100%; padding: 15px; border-radius: 20px; border: 0px solid black; font-size: 16px; background-color: #212121f2; background-color: transparent; color: white; outline: none;">
     <h5>{{comment.comment}} </h5>
     <hr style="width=100%; border: 0.1px solid white; color=white;">
@@ -356,7 +365,7 @@ h2.text-center {
 
   </li>
   <br>
-
+{%endif%}
 {% endfor %}
 </ul>
 

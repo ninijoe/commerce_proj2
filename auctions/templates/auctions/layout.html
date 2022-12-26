@@ -20,7 +20,7 @@
 
     body {
 
-      background: linear-gradient(to left, #000000, #111111, #222222, #333333, #444444, #555555, #666666);
+      background: linear-gradient(to left, #111111, #333333, #444444, #555555, #666666, #777777);
     }
 
     strong {
@@ -140,7 +140,8 @@
 
 
     .footer-section{
-      min-height: 100vh;
+      position: absolute;
+      margin-top: 300px;
       -webkit-text-size-adjust: 100%;
       font-family: Open Sans, Helvetica, Arial, sans;
       color: #333333;
@@ -167,34 +168,46 @@
 {% if user.is_authenticated %}
         <div class="body">
           <div class="logo">
-            <a style="margin-left: -40px;" href="{%url 'index'%}"><img src="{% static 'auctions/logo.png' %}" alt="logo"></a>
-            <strong> welcome {{ user.username }}</strong>
+            <a style="margin-left: -60px;" href="{%url 'index'%}"><img src="{% static 'auctions/logo.png' %}" alt="logo"></a>
+            <li>
+                {%csrf_token%}
+                <a  href="{% url 'logout' %}" style="justify-content: right; text-align: right; margin-right: 20px;">Log Out</a>
+            </li>
           </div>
 
           <h1>
               <div style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.2em; font-weight: bold; text-align: center; padding: 10px; background-color: blue; border-radius: 5px; text-shadow: 0 0 10px #ff3; ">auctionbox</div>
           </h1>
-          <div style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.2em; font-weight: bold; text-align: center; padding: 10px; background-color: red; border-radius: 5px; text-shadow: 0 0 10px #ff3; animation: marquee 5s linear infinite;"> now live </div>
+          <div style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.2em; font-weight: bold; text-align: center; padding: 10px; background-color: red; border-radius: 5px; text-shadow: 0 0 10px #ff3; animation: marquee 5s linear infinite;"> welcome, {{ user.username }}</div>
           <br>
           <ul class="nav">
                   <li class="nav-item">
-                      <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+                      <a class="nav-link" href="{% url 'index' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'sellers' %}">Users</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="{% url 'categories' %}">Categories</a>
                   </li>
 
                   <li class="nav-item">
-                      <a class="nav-link" href="{% url 'create_listing' %}">Create New Listing</a>
+                      <a class="nav-link" href="{% url 'create_listing' %}">Create Listing</a>
                   </li>
 
                   <li class="nav-item">
                       <a class="nav-link" href="{% url 'watchlist' %}">Watchlist</a>
                   </li>
                   <li class="nav-item">
-                      {%csrf_token%}
-                      <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                      <a class="nav-link" href="{% url 'watchlist' %}">Notifications</a>
                   </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'me' %}">Me</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'watchlist' %}">Settings</a>
+                  </li>
+
               {% else %}
                   <div class="logo">
                     <a href="{%url 'index'%}"><img src="{% static 'auctions/logo.png' %}" alt="logo"></a>

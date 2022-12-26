@@ -11,6 +11,7 @@ import datetime
 from django.contrib import messages
 
 
+
 from .models import User, Category, Bid, AuctionListing, AuctionListingForm, Comment, Bid , BidForm
 
 
@@ -21,12 +22,25 @@ def index(request):
     return render(request, 'auctions/index.html', {'listings': listings})
 
 
+def me(request):
+        user = request.user
+        listings = AuctionListing.objects.filter(seller_id = user)
+        return render(request, 'auctions/me.html', {'listings': listings})
+
 
 
 
 def categories(request):
     categories = Category.objects.all()
     return render(request, 'auctions/categories.html', {'categories': categories})
+
+
+
+
+
+def sellers(request):
+    return render(request, 'auctions/sellers.html')
+
 
 
 
@@ -75,7 +89,7 @@ def listing(request, listing_id):
 @login_required(login_url='login')
 def close_listing(request, listing_id):
 
-    if request.method == POST:
+    if request.method == 'POST':
 
         user = request.user
 
@@ -216,7 +230,7 @@ def create_listing(request):
             listing = form.save(commit=False)
             listing.seller = request.user
             listing.save()
-            messages.success(request, "Listing created successfully!")
+            messages.error(request, "Listing created successfully!")
             return HttpResponseRedirect(reverse("index"))
     else:
         #If the request method is not a POST request, creates an empty AuctionListingForm object

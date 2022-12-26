@@ -20,5 +20,7 @@ urlpatterns = [
     path("terms", views.terms, name='terms'),
     path("about", views.about, name='about'),
     path("close_listing/<int:listing_id>", views.close_listing, name='close_listing'),
+    path("me", views.me, name='me'),
+    path("sellers", views.sellers, name='sellers'),
 
 ]

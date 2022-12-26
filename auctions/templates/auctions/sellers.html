@@ -75,6 +75,12 @@
     max-height: 32px;      /* fallback */
     -webkit-line-clamp: 1; /* number of lines to show */
     -webkit-box-orient: vertical;
+    font-weight:bold;
+    color:white;
+}
+
+.card-title:hover{
+    color:pink;
 }
 
 
@@ -160,6 +166,15 @@ select {
 
 {%csrf_token%}
 <br>
+{% if not user.is_authenticated %}
+<h4 style="color:white; font-family: 'Courier New', monospace; font-size: 1rem;">AuctionBox (founded in Canada) is an online social market site where users can auction/sell as well as
+   advertise anything ranging from electronics, movies, songs, books etc and engage with sellers as well as buyers of products and services.
+   Through carefully curated listings, and a safe center for buyer/seller interactions, we aim to enhance the advent of trade through social technology. You have the option to
+   either set a listing for auction or final sale. Advertisement functionalities are also included.
+   See <a href="{%url 'about'%}" style="color: pink;">more</a>
+</h4>
+{%endif%}
+
 
 {% if messages %}
   {% for message in messages %}
@@ -167,8 +182,7 @@ select {
   {% endfor %}
 {% endif %}
 
-<h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">{{category.categoryName}}</h2>
-<br>
+<h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">Discover Users</h2><br>
 
 <div class="row mx-7" >
 {%for listing in listings reversed %}
@@ -180,7 +194,7 @@ select {
       {%csrf_token%}
       <img class= "card-img-top" src="{{listing.imageUrl}}" alt="imageurl" style="width:130px; height:175px; border-radius: 10px; margin: 0 auto;">
       <h5 class="card-title" style="font-weight:bold; color:white; font-size:">{{listing.title}}</h5>
-      <button type="button" style="color: transparent" class="btn btn-primary" data-toggle="collapse" data-target="#description_{{listing.id}}" style="width: 50px; height: 40px;">
+      <button type="button" style="" class="btn btn-primary" data-toggle="collapse" data-target="#description_{{listing.id}}" style="width: 50px; height: 40px;">
         <span class="collapse-icon"><h3>˯</h3></span>
       </button>
       <a href="{% url 'add_to_watchlist' listing.id %}" style="position: absolute; top: 0; right: 0;"><i class="fas fa-times" style=" font-size: 30px;">x</i></a>
@@ -224,7 +238,6 @@ select {
 {%endif%}
 {% endfor %}
 </div>
-
 
 
 
