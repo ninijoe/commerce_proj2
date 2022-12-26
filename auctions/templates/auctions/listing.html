@@ -154,7 +154,7 @@ h2.text-center {
 <h2 class="text-center" style="color: white; position: sticky; font-family: 'Courier New', monospace;"> {{title}}</h2>
 <br>
 
-{%if user_is_owner %}
+{%if seller == user %}
       {%if isActive%}
       <form action= "{% url 'close_listing' listing_id %}" method="POST" style= "justify-content: center; position: relative; text-align: center;  top: -25px; ">
         {%csrf_token%}
@@ -163,21 +163,17 @@ h2.text-center {
       </form>
 
       {%else%}
-            <div class="alert alert-success" role="alert">Congratulations! Your auction is closed</div>
+            <div class="alert alert-success" role="alert">Your listing is closed</div>
       {% endif %}
-
-{%else %}
-      {%if not isActive%}
-
-          <div class="alert alert-success" role="alert">Congratulations! You won the auction</div>
-
-      {%endif%}
 
 {% endif %}
 
 
 
+{%if not seller == user %}
+<div class="alert alert-success" role="alert">This listing is closed</div>
 
+{% endif %}
 
 
 
