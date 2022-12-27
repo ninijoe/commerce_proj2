@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.shortcuts import redirect
 from django.middleware import csrf
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 import datetime
 from django.contrib import messages
@@ -36,10 +37,20 @@ def categories(request):
 
 
 
+def settings(request):
+
+    return render(request, 'auctions/settings.html')
+
+
 
 
 def sellers(request):
-    return render(request, 'auctions/sellers.html')
+
+        users = User.objects.all()
+        context = {
+            'all_users': users
+        }
+        return render(request, 'auctions/sellers.html', context)
 
 
 
@@ -301,7 +312,7 @@ def remove_from_watchlist(request , listing_id ):
     listing.watchlist.remove(user)
     messages.error(request, "Listing was successfully removed from watchlist")
 
-    return HttpResponseRedirect(reverse("listing" , args=(listing_id, )))
+    return HttpResponseRedirect(reverse("watchlist"))
 
 
 

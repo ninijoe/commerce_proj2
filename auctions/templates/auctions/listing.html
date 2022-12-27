@@ -159,7 +159,7 @@ h2.text-center {
       <form action= "{% url 'close_listing' listing_id %}" method="POST" style= "justify-content: center; position: relative; text-align: center;  top: -25px; ">
         {%csrf_token%}
         <input type="hidden" name="listing_id" value="{{listing.id}}">
-        <button type="submit" style="width: 190px; background-color: red; text-align: center; justify-content: center;" class="btn btn-success" name="button" ">close auction</button>
+        <button type="submit" style="width: 190px; background-color: red; text-align: center; justify-content: center;" class="btn btn-success" name="button" ">close item</button>
       </form>
 
       {%else%}
@@ -171,8 +171,9 @@ h2.text-center {
 
 
 {%if not seller == user %}
-<div class="alert alert-success" role="alert">This listing is closed</div>
-
+    {%if not isActive%}
+        <div class="alert alert-success" role="alert">This listing is closed</div>
+    {% endif %}
 {% endif %}
 
 

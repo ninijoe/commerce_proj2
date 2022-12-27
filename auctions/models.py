@@ -15,7 +15,7 @@ class User(AbstractUser):
 
 class Category(models.Model):
     categoryName = models.CharField(max_length=50)
-    
+
 
 
     def __str__(self):
@@ -81,7 +81,7 @@ class AuctionListing(models.Model):
 class AuctionListingForm(forms.ModelForm):
     class Meta:
         model = AuctionListing
-        fields = ['title', 'description', 'imageUrl', 'startingBid', 'isActive', 'category', 'watchlist', 'seller_id']
+        fields = ['title', 'description', 'imageUrl', 'startingBid', 'isActive', 'category']
 
 
 

@@ -7,17 +7,18 @@
     <style>
         form {
           width: 400px;
-          margin: 0 auto;
+          justify-content: center;
+          margin-left: 300px;
           color: white;
         }
 
-        
+
 
 
     </style>
 
 
-  <form method="post" action="{% url 'create_listing' %}">
+  <form method="post" action="{% url 'create_listing' %}" >
         {% csrf_token %}
         {{ form.as_p }}
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">

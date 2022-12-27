@@ -1,0 +1,113 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<style media="screen">
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .card {
+      border: 1px solid #ccc;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+      width: 10rem;
+      height: 3rem;
+  }
+
+  h2{
+    color: white;
+  }
+
+.category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 10px;
+  text-decoration: none;
+  text-decoration-line: none;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.category-name span{
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+.category:hover {
+    background-color: #ccc;
+    color: #fff;
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+a:hover {
+    background-color: #ccc;
+    color: #fff;
+    .category:hover {
+    background-color: #ccc;
+    color: #fff;
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+span a{
+    color: white;
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+
+</style>
+{%csrf_token%}
+{% if user.is_authenticated %}
+<h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">Settings</h2><br>
+
+
+<div>
+    {%csrf_token%}
+
+    <div class="row mx-3" >
+      <div class="card mx-3" style="width: 100%; height: 5rem; background-color: transparent;">
+
+          <div class="category">
+            <span class="category-name" style="color: white; font-size: 3rem;">
+              <a  href="{% url 'logout' %}" style="color: white; text-decoration: none; text-decoration-line: none;" >Log Out</a>
+            </span>
+
+          </div>
+
+
+       </div>
+    </div>
+
+    <div class="row mx-3" >
+      <div class="card mx-3" style="width: 100%; height: 5rem; background-color: transparent;">
+
+        <div class="category">
+          <span class="category-name" style="color: white; font-size: 3rem;">
+            <a  href="{% url 'logout' %}" style="color: white; text-decoration: none; text-decoration-line: none;" >Delete Profile</a>
+          </span>
+
+        </div>
+
+
+       </div>
+    </div>
+
+
+
+
+</div>
+
+{% else %}
+<h2 class="text-center">Please log in to view active listings.</h2>
+{% endif %}
+{% endblock %}
