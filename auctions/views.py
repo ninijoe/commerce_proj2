@@ -116,6 +116,8 @@ def close_listing(request, listing_id):
 
         #user_is_bidder = (bidder.username == user.username)
 
+        listing_image = listing.imageUrl
+
         listing.isActive = False
 
         listing.save()
@@ -126,6 +128,7 @@ def close_listing(request, listing_id):
 
             #'bidder': bidder,
             'listing_id': listing_id,
+            'listing_image' : listing_image,
             'listing': listing,
             'seller': seller,
             'user': user,
