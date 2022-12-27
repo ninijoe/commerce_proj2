@@ -24,6 +24,7 @@ def index(request):
 
 
 def me(request):
+    if request.method == 'GET':
         user = request.user
         listings = AuctionListing.objects.filter(seller_id = user)
         return render(request, 'auctions/me.html', {'listings': listings})
@@ -202,33 +203,6 @@ def add_bid(request, listing_id):
 
 
 
-
-
-
-@login_required(login_url='login')
-def remove_bid(request, listing_id):
-    listing = AuctionListing.objects.get(pk=listing_id)
-    bidder = request.user
-    if request.method == 'POST':
-        try:
-            bid_obj = Bid.objects.filter(bidder=bidder, auction_listing=listing).latest('bid')
-            bid_obj.delete()
-            if Bid.objects.filter(auction_listing=listing).exists():
-                listing.startingBid = Bid.objects.filter(auction_listing=listing).latest('bid').bid
-            else:
-                listing.startingBid = listing.startingBid
-            listing.save()
-            messages.success(request, "Your bid has been removed. Note: the current bid may or may not change ")
-
-            return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
-        except ValueError:
-            raise ValueError("Bid could not be removed").format(user)
-        except Bid.DoesNotExist:
-            messages.error(request, "You have no bid on this item")
-            return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
-    else:
-        messages.error(request, "You are not the highest bidder and cannot remove your bid.")
-        return HttpResponseRedirect(reverse("listing", args=(listing_id, )))
 
 
 

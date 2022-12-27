@@ -191,10 +191,8 @@
           <div style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.2em; font-weight: bold; text-align: center; padding: 10px; background-color: red; border-radius: 5px; text-shadow: 0 0 10px #ff3; animation: marquee 5s linear infinite;"> welcome, {{ user.username }}</div>
           <br>
           <ul class="nav">
-                  
-                  <li class="nav-item">
-                      <a class="nav-link" href="{% url 'sellers' %}">Users</a>
-                  </li>
+
+
                   <li class="nav-item">
                       <a class="nav-link" href="{% url 'categories' %}">Categories</a>
                   </li>
@@ -205,6 +203,9 @@
 
                   <li class="nav-item">
                       <a class="nav-link" href="{% url 'watchlist' %}">Watchlist</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'sellers' %}">Users</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="{% url 'watchlist' %}">Notifications</a>

@@ -198,7 +198,7 @@ h2.text-center {
 <div class="card-body" style="text-align: center; position: relative; display: flex;">
 
 
-  <img class= "card-img-top" src="{{listing.imageUrl}}" alt="imageurl" style="width:286px; height:371px; border-radius: 10px; margin: 0 auto; margin-top: -20px; float: left; margin-left:-10px;">
+  <img class= "card-img-top" src="{{listing.imageUrl}}" alt="imageurl" style="width:326px; height:371px; border-radius: 10px; margin: 0 auto; margin-top: -20px; float: left; margin-left:-10px;">
 
   <div class="activity-AbstractUser">
 
@@ -286,11 +286,7 @@ h2.text-center {
 
 
         {% endif %}
-        <form action="{% url 'remove_bid' listing_id %}" method="POST" style="margin-top: 20px; margin-left: 145px; margin-bottom: 180px;">
-          {%csrf_token%}
-          <input type="hidden" name="listing_id" value="{{listing.id}}">
-          <button type="submit" style="width: 190px; background-color: red;" class="btn btn-success" name="button" style ="background-color: red; margin-left: 140px;text-align: center; justify-content: center; justify-content: center; text-align: center;">remove bid</button>
-        </form>
+
         {% endif %}
 
       {%endif%}
