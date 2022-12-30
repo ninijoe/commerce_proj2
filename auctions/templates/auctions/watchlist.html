@@ -3,161 +3,162 @@
 {% block body %}
 <style media="screen">
 
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-
+  body{
+    background: linear-gradient(to left, #111111, #333333, #444444, #555555, #666666, #777777);
   }
 
-  .text-center {
-          text-align: center;
-          font-size: 1.5rem;
-          font-weight: bold;
-          color: white;
-  }
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
-  .card {
+}
 
-      width: 11rem;
-      height: 25rem;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      transition: 0.3s;
-      background-color: black;
-      margin-bottom: 35px;
-  }
+.text-center {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+}
 
-  .card-img-top {
-      width: 100%;
-      height: auto;
-  }
-
-  .card-body {
-      margin-top: 10px;
-      padding: 10px;
-  }
-
-  .card:hover{
-      transform: scale(1.12);
-      background-color: red;
-  }
-
-  .card:hover{
-      transform: scale(1.12);
-      background-color: blue;
-  }
-
-  .card:hover{
-      transform: scale(1.12);
-  }
+.card {
+    width: 20rem;
+    height: 35rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    background-color: black;
+    margin-bottom: 70px;
+}
 
 
 
-  .card:hover{
-      transform: scale(1.12);
-      background-color: var(--random-color);
-  }
+.card-body {
+    margin-top: 20px;
+    padding: 10px;
 
-  :root {
-      --random-color: red;
+}
 
-      --random-color: ${['red', 'blue', 'yellow', 'green'][Math.floor(Math.random() * 4)]};
-  }
+.card:hover{
+    transform: scale(1.12);
+    background-color: red;
+}
 
-  .card-title {
-      font-family: 'Courier New', monospace;
-      font-size: 1.0rem;
-      font-weight: bold;
-      margin-bottom: 5px;
-      margin-top: 10px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      line-height: 23px;     /* fallback */
-      max-height: 32px;      /* fallback */
-      -webkit-line-clamp: 1; /* number of lines to show */
-      -webkit-box-orient: vertical;
-      font-weight:bold;
-      color:white;
-  }
+.card:hover{
+    transform: scale(1.12);
+    background-color: blue;
+}
 
-  .card-title:hover{
-      color:pink;
-  }
+.card:hover{
+    transform: scale(1.12);
+}
 
 
-  .card-text {
-      font-size: 1.2rem;
-      color: white;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      line-height: 16px;     /* fallback */
-      max-height: 32px;      /* fallback */
-      -webkit-line-clamp: 1; /* number of lines to show */
-      -webkit-box-orient: vertical;
-  }
 
-  .btn {
-      background-color: black;
-      color: #fff;
-      padding: 0px 10px;
-      border-radius: 10px;
-  }
+.card:hover{
+    transform: scale(1.12);
+    background-color: var(--random-color);
+}
 
+:root {
+    --random-color: red;
 
-  .btn:hover {
-      background-color: grey;
-      color: #fff;
-      padding: 0px 10px;
-      border-radius: 10px;
-  }
+    --random-color: ${['red', 'blue', 'yellow', 'green'][Math.floor(Math.random() * 4)]};
+}
 
-  h2.text-center {
-          font-size: 2rem;
-          font-weight: bold;
-          color: white;
-          margin-bottom: 1rem;
-      }
+.card-title {
+    font-family: 'Courier New', monospace;
+    font-size: 1.0rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 23px;     /* fallback */
+    max-height: 32px;      /* fallback */
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    font-weight:bold;
+    color:white;
+}
 
-  select {
-          width: 100%;
-          padding: 0.5rem;
-          font-size: 1.2rem;
-          border-radius: 0.25rem;
-          border: 1px solid #ced4da;
-          margin-bottom: 1rem;
-      }
-
-      input[type="submit"][name="listing"] {
-          background-color: skyblue;
-          border: none;
-          color: white;
-          padding: 10px 20px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-      }
-
-      input[type="submit"][name="listing"]:hover{
-          background-color: blue;
-
-      }
+.card-title:hover{
+    color:pink;
+}
 
 
-  form  div  a{
-        color: red;
+.card-text {
+    font-size: 1.2rem;
+    color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px;     /* fallback */
+    max-height: 32px;      /* fallback */
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.btn {
+    background-color: black;
+    color: #fff;
+    padding: 0px 10px;
+    border-radius: 10px;
+}
+
+
+.btn:hover {
+    background-color: grey;
+    color: #fff;
+    padding: 0px 10px;
+    border-radius: 10px;
+}
+
+h2.text-center {
+        font-size: 2rem;
+        font-weight: bold;
+        color: white;
+        margin-bottom: 1rem;
+    }
+
+select {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 1.2rem;
+        border-radius: 0.25rem;
+        border: 1px solid #ced4da;
+        margin-bottom: 1rem;
+    }
+
+    input[type="submit"][name="listing"] {
+        background-color: red;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
         text-decoration: none;
-        text-decoration-line: none;
-      }
+        display: inline-block;
+        font-size: 16px;
+    }
 
-  form  div  a:hover{
-        color: red;
-        text-decoration: none;
-        text-decoration-line: none;
+    input[type="submit"][name="listing"]:hover{
+        background-color: red;
 
-      }
+    }
+
+
+    a{
+      color: lightblue;
+      text-decoration: none;
+      text-decoration-line: none;
+    }
+
+    a:hover{
+      color: blue;
+      text-decoration: none;
+      text-decoration-line: none;
+
+    }
 
 
 
@@ -167,27 +168,45 @@
 </style>
 
 {%csrf_token%}
+<br>
+{% if not user.is_authenticated %}
+<h4 style="color:white; font-family: 'Courier New', monospace; font-size: 1rem;">AuctionBox (founded in Canada) is an online social market site where users can auction/sell as well as
+   advertise anything ranging from electronics, movies, songs, books etc and engage with sellers as well as buyers of products and services.
+   Through carefully curated listings, and a safe center for buyer/seller interactions, we aim to enhance the advent of trade through social technology. You have the option to
+   either set a listing for auction or final sale. Advertisement functionalities are also included.
+   See <a href="{%url 'about'%}" style="color: pink;">more</a>
+</h4>
+{%endif%}
+
+
 {% if messages %}
   {% for message in messages %}
   <div class="alert alert-success" role="alert">{{ message }}</div>
   {% endfor %}
 {% endif %}
 
-<h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">Watchlist</h2>
+<h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">Watchlist</h2><br>
 <br>
 <div class="row mx-7" >
-{%for listing in listings %}
-<div class="card mx-3" >
+{%for listing in listings reversed %}
+{%if isListingInWatchList%}
+
+
+{%else%}
+
+
+
+<div class="card mx-4" style ='border-radius: 10px;'>
 
   <form class="listing" action="{% url 'listing' listing.id %}" method="get">
     <div class="card-body" style="text-align: center; position: relative;">
       {%csrf_token%}
-      <img class= "card-img-top" src="{{listing.imageUrl}}" alt="imageurl" style="width:130px; height:175px; border-radius: 10px; margin: 0 auto;">
+      <img class= "card-img-top" src="{{listing.imageUrl}}" alt="imageurl" style="width:270px; height:315px; border-radius: 10px; margin: 0 auto;">
       <h5 class="card-title" style="font-weight:bold; color:white; font-size:">{{listing.title}}</h5>
       <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#description_{{listing.id}}" style="width: 50px; height: 40px;">
         <span class="collapse-icon"><h3>˯</h3></span>
       </button>
-      <a href="{% url 'remove_from_watchlist' listing.id %}" style="position: absolute; top: 0; right: 0; "><i class="fas fa-times" style=" font-size: 25px; text-decoration: none; text-decoration-line: none;  ">x</i></a>
+      <a href="{% url 'remove_from_watchlist' listing.id %}" style="position: absolute; margin-left: 30px; top: 0; right: 0; color: red;"><i class="fas fa-times" style=" font-size: 30px;">x</i></a>
 
       <div id="description_{{listing.id}}" class="collapse" style="margin-top: -19px;">
         <br>
@@ -199,9 +218,11 @@
   </form>
 
 </div>
+
+
+{%endif%}
 {% endfor %}
 </div>
-
 
 
 

@@ -5,6 +5,10 @@
     <br>
 
     <style>
+      body{
+        background: linear-gradient(to left, #111111, #333333, #444444, #555555, #666666, #777777);
+      }
+
         form {
           width: 400px;
           justify-content: center;
@@ -39,7 +43,7 @@
   <form method="post" action="{% url 'create_listing' %}" >
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        <input autofocus type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         <input type="submit" value="Create Listing" />
   </form>
 {% endblock %}

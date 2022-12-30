@@ -3,6 +3,10 @@
 {% block body %}
 <style media="screen">
 
+  body{
+    background: linear-gradient(to left, #111111, #333333, #444444, #555555, #666666, #777777);
+  }
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -196,7 +200,7 @@ select {
       <button type="button" style="" class="btn btn-primary" data-toggle="collapse" data-target="#description_{{listing.id}}" style="width: 50px; height: 40px;">
         <span class="collapse-icon"><h3>˯</h3></span>
       </button>
-      <a href="{% url 'add_to_watchlist' listing.id %}" style="position: absolute; top: 0; right: 0;"><i class="fas fa-times" style=" font-size: 30px;">x</i></a>
+      <a href="{% url 'add_to_watchlist' listing.id %}" style="position: absolute; top: 0; right: 0;"><i class="fas fa-times" style=" font-size: 30px;"></i></a>
 
       <div id="description_{{listing.id}}" class="collapse" style="margin-top: -19px;">
         <br>
@@ -221,7 +225,7 @@ select {
       <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#description_{{listing.id}}" style="width: 50px; height: 40px;">
         <span class="collapse-icon"><h3>˯</h3></span>
       </button>
-      <a href="{% url 'add_to_watchlist' listing.id %}" style="position: absolute; top: 0; right: 0;"><i class="fas fa-times" style=" font-size: 30px;">+</i></a>
+      <a href="{% url 'add_to_watchlist' listing.id %}" style="position: absolute; top: 0; right: 0;"><i class="fas fa-times" style=" font-size: 30px;"></i></a>
 
       <div id="description_{{listing.id}}" class="collapse" style="margin-top: -19px;">
         <br>
