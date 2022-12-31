@@ -81,7 +81,7 @@ class AuctionListing(models.Model):
 class AuctionListingForm(forms.ModelForm):
     class Meta:
         model = AuctionListing
-        fields = ['title', 'description', 'imageUrl', 'startingBid', 'isActive', 'seller_id', 'category']
+        fields = ['title', 'description', 'imageUrl', 'startingBid', 'isActive', 'category']
 
 
 
