@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import datetime
 from django.contrib import messages
+from PIL import Image
 
 
 
@@ -232,7 +233,7 @@ def create_listing(request):
         if form.is_valid():
             #Sets the user of the listing to the current user and seller of the listing
             listing = form.save(commit=False)
-            image = listing.image_one
+
             listing.seller = request.user
             listing.seller_id = listing.seller
 
@@ -242,7 +243,7 @@ def create_listing(request):
     else:
         #If the request method is not a POST request, creates an empty AuctionListingForm object
         form = AuctionListingForm()
-    return render(request, 'auctions/create_listing.html', {'form': form })
+    return render(request, 'auctions/create_listing.html', {'form': form , 'image_one': image_one})
 
 
 

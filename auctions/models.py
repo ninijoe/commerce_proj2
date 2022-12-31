@@ -52,7 +52,7 @@ class AuctionListing(models.Model):
         return self.description
 
     def get_listing_image(self):
-        return self.image
+        return self.image_one
 
     def get_listing_startingBid(self):
         return self.startingBid
