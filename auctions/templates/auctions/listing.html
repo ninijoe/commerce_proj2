@@ -319,7 +319,7 @@ h2.text-center {
 
     <form class="" action="{% url 'comment' listing_id %}" method="POST">
         {%csrf_token%}
-        <input type="text" name="comment" value="" placeholder=" add a comment" style="width: 490px; padding: 13px; border-radius: 35px; border: 1px solid #ccc; font-size: 16px; background-color: transparent; color: white; outline: none; margin-bottom: 3px;">
+        <input type="text" name="comment" value="" placeholder=" add a comment" style="width: 490px; padding: 13px; border-radius: 35px; border: 1px solid black; font-size: 16px; background-color: white; color: black; outline: none; margin-bottom: 3px;">
           <br><br>
         <button type="submit" class="btn btn-success" name="button" style=" width: 18%; padding: 7px; font-size: 1.2rem; border-radius: 5px; margin-left:5px; background-color: lightblue; color: black; ">
           submit
@@ -357,7 +357,7 @@ h2.text-center {
   <li class="list-group-item" style=" margin-left:0px;  width: 100%; padding: 15px; border-radius: 20px; border: 0px solid black; font-size: 16px; background-color: #212121f2; background-color: transparent; color: white; outline: none;">
     <h5>{{comment.comment}} </h5>
     <hr style="width=100%; border: 0.1px solid white; color=white;">
-    <h6 style = "color: lightblue;">{{comment.author.email}} </h6>
+    <h6 style = "color: lightblue;">{{comment.author.username}} </h6>
     <p style ="color: pink; justify-content: right; text-align: right; margin-top: -26px;">{{comment.created}}</p>
 
   </li>

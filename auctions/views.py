@@ -23,6 +23,18 @@ def index(request):
     return render(request, 'auctions/index.html', {'listings': listings})
 
 
+def notifications(request):
+    user = request.user
+    listings = AuctionListing.objects.filter(seller_id = user)
+    for listing in listings:
+        seller = listing.seller_id
+        all_comments = Comment.objects.filter(auction_listing = listing )
+        all_bids = Bid.objects.filter(auction_listing = listing)
+    return render(request, 'auctions/notifications.html', {'all_comments': all_comments , 'all_bids': all_bids ,'seller': seller})
+
+
+
+
 def me(request):
     if request.method == 'GET':
         user = request.user

@@ -1,37 +1,16 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">Create Post</h2>
+    <h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">Create Listing</h2>
     <br>
 
     <style>
-      body{
-        background: linear-gradient(to left, #111111, #333333, #444444, #555555, #666666, #777777);
-      }
-
         form {
           width: 400px;
-          justify-content: center;
-          margin-left: 50px;
+          margin: 0 auto;
           color: white;
         }
 
-        a:hover {
-            background-color: #ccc;
-            color: #fff;
-            .category:hover {
-            background-color: #ccc;
-            color: #fff;
-            text-decoration: none;
-            text-decoration-line: none;
-
-        }
-
-        a{
-          color: lightblue;
-          text-decoration: none;
-          text-decoration-line: none;
-        }
 
 
 
@@ -40,10 +19,11 @@
     </style>
 
 
-  <form method="post" action="{% url 'create_listing' %}" >
+  <form method="post" action="{% url 'create_listing' %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <input autofocus type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         <input type="submit" value="Create Listing" />
   </form>
 {% endblock %}

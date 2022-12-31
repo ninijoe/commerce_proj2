@@ -64,11 +64,11 @@ class AuctionListing(models.Model):
         return self.category
 
     def get_listing_watchlist(self):
-        return self.watchlist
+        return f"{self.seller_id}'s watchlist "
 
 
     def get_listing_seller_id(self):
-        return self.seller_id
+        return f" {self.title} posted by {self.seller_id} "
 
 
     def created(self):
