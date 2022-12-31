@@ -228,9 +228,10 @@ def create_listing(request):
         form = AuctionListingForm(request.POST)
         #Checks if the form is valid
         if form.is_valid():
-            #Sets the user of the listing to the current user
+            #Sets the user of the listing to the current user and seller of the listing
             listing = form.save(commit=False)
             listing.seller = request.user
+            listing.seller_id = listing.seller
             listing.save()
             messages.error(request, "Listing created successfully!")
             return HttpResponseRedirect(reverse("index"))
