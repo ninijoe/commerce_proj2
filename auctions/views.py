@@ -67,7 +67,9 @@ def listing(request, listing_id):
     context = {
         'title': listing.get_listing_title(),
         'description': listing.get_listing_description(),
-        'imageUrl': listing.get_listing_image(),
+        'image_one': listing.image_one,
+        'image_two': listing.image_two,
+        'image_three': listing.image_three,
         'startingBid': listing.get_listing_startingBid(),
         'isActive': listing.get_listing_isActive(),
         'category': listing.get_listing_category(),
@@ -230,15 +232,17 @@ def create_listing(request):
         if form.is_valid():
             #Sets the user of the listing to the current user and seller of the listing
             listing = form.save(commit=False)
+            image = listing.image_one
             listing.seller = request.user
             listing.seller_id = listing.seller
+
             listing.save()
             messages.error(request, "Listing created successfully!")
             return HttpResponseRedirect(reverse("index"))
     else:
         #If the request method is not a POST request, creates an empty AuctionListingForm object
         form = AuctionListingForm()
-    return render(request, 'auctions/create_listing.html', {'form': form})
+    return render(request, 'auctions/create_listing.html', {'form': form })
 
 
 

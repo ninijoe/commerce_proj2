@@ -29,11 +29,12 @@ class Category(models.Model):
 
 
 
-
 class AuctionListing(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    imageUrl = models.CharField(max_length=1000)
+    image_one = models.ImageField(upload_to='auctions/images/' ,  blank = True  )
+    image_two = models.ImageField(upload_to='auctions/images/' ,  blank = True   )
+    image_three = models.ImageField(upload_to='auctions/images/' ,  blank = True  )
     startingBid = models.DecimalField(max_digits=10, decimal_places=2)
     isActive= models.BooleanField(default=True)
     category= models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, related_name="category")
@@ -51,7 +52,7 @@ class AuctionListing(models.Model):
         return self.description
 
     def get_listing_image(self):
-        return self.imageUrl
+        return self.image
 
     def get_listing_startingBid(self):
         return self.startingBid
@@ -81,7 +82,7 @@ class AuctionListing(models.Model):
 class AuctionListingForm(forms.ModelForm):
     class Meta:
         model = AuctionListing
-        fields = ['title', 'description', 'imageUrl', 'startingBid', 'isActive', 'category']
+        fields = ['title', 'description', 'image_one', 'image_two', 'image_three', 'startingBid', 'isActive', 'category']
 
 
 
