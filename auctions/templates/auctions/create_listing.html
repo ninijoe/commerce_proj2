@@ -11,19 +11,17 @@
           color: white;
         }
 
-
-
-
+    
 
 
     </style>
 
 
-  <form method="post" action="{% url 'create_listing' %}">
+  <form method="post" action="{% url 'create_listing' %}" >
         {% csrf_token %}
         {{ form.as_p }}
-        
-        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+        <input class="inputfield" type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         <input type="submit" value="Create Listing" />
   </form>
 {% endblock %}

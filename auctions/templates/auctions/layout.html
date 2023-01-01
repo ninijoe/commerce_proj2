@@ -145,7 +145,7 @@
       margin-top: 300px;
       -webkit-text-size-adjust: 100%;
       font-family: Open Sans, Helvetica, Arial, sans;
-      color: #333333;
+      color: white;
       font-size: 1.1em;
       width: 100%;
       margin-left: 0px;
@@ -168,6 +168,7 @@
 
 {% if user.is_authenticated %}
         <div class="body">
+          <p  style = "color: white; margin-bottom: -15px;">notifications</p>
           <div class="logo">
             <a style="margin-left: -35px; margin-top: -15px; margin-bottom: -31px; background-color: transparent;" href="{%url 'notifications'%}"><img src="{% static 'auctions/logo.png' %}" alt="logo"></a>
             <li>
@@ -273,6 +274,7 @@
 
            .footer-links{
              justify-content: center;
+             color: white;
              text-align: center;
              flex: auto;
              flex-direction: row;
@@ -280,7 +282,7 @@
              text-decoration: none;
            }
            .footer-links a:hover{
-             color: pink;
+             color: white;
              justify-content: center;
              text-align: center;
              flex: auto;

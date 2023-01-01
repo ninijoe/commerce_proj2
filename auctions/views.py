@@ -20,7 +20,10 @@ from .models import User, Category, Bid, AuctionListing, AuctionListingForm, Com
 
 def index(request):
     listings = AuctionListing.objects.all()
-    return render(request, 'auctions/index.html', {'listings': listings})
+    user = request.user
+    for listing in listings:
+        seller_id = listing.seller_id
+    return render(request, 'auctions/index.html', {'listings': listings, 'seller_id': seller_id , 'user': user})
 
 
 def notifications(request):
