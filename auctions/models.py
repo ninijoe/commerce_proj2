@@ -129,4 +129,4 @@ class Comment(models.Model):
 
 
     def __str__(self):
-        return f" on {self.created}, {self.author} dropped a comment on {self.auction_listing} "
+        return f"{self.author} dropped a comment on {self.auction_listing} "
