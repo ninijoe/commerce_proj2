@@ -100,11 +100,12 @@
     }
 
 
+
     .nav li a {
         display: block;
         color: white;
         text-align: center;
-        padding: 14px 16px;
+        padding: 26px 32px;
         text-decoration: none;
         justify-content: center;
         flex: 0 0 auto;
@@ -116,6 +117,7 @@
 
     .nav li a:hover {
         background-color: black;
+
 
     }
 
@@ -168,12 +170,11 @@
 
 {% if user.is_authenticated %}
         <div class="body">
-          <p  style = "color: white; margin-bottom: -15px;">notifications</p>
           <div class="logo">
-            <a style="margin-left: -35px; margin-top: -15px; margin-bottom: -31px; background-color: transparent;" href="{%url 'notifications'%}"><img src="{% static 'auctions/logo.png' %}" alt="logo"></a>
+            <a style="margin-left: -32px; margin-top: -15px; margin-bottom: -31px; background-color: transparent;" href="{%url 'index'%}"><img src="{% static 'auctions/logo.png' %}" alt="logo"></a>
             <li>
                 {%csrf_token%}
-                <a class="nav-link" href="{% url 'settings' %}" style = "margin-right: 20px; margin-top: -6px;">
+                <a class="nav-link" href="{% url 'settings' %}" style = "margin-right: 25px; margin-top: -6px;">
                     <svg xmlns="http://www.w3.org/2000/svg" style="color: white;" width="66" height="66" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
                     <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
                     <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
@@ -196,7 +197,16 @@
           <div style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.2em; font-weight: bold; text-align: center; padding: 10px; background-color: red; border-radius: 5px; text-shadow: 0 0 10px #ff3; animation: marquee 5s linear infinite;"> welcome, {{ user.username }}</div>
           <br>
           <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'notifications' %}">Notifications</a>
+            </li>
+            
+            <svg class="false" width="25" height="25"style ="margin-top: 13px; margin-left: -27px; margin-right: 17px;" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g>
+                      <path fill="white" fill-rule="evenodd" clip-rule="evenodd" d="M12.5 0.5C12.9142 0.5 13.25 0.835786 13.25 1.25V2.78437C17.4907 3.17507 20.75 6.84424 20.75 11.119C20.75 14.6514 21.1208 16.6654 21.4659 17.7701C21.6378 18.3204 21.8009 18.6373 21.9028 18.8015C21.9537 18.8833 21.9891 18.927 22.0028 18.9429L22.0056 18.9461C22.2277 19.1486 22.3083 19.4659 22.2066 19.7516C22.1002 20.0504 21.8172 20.25 21.5 20.25H3.50001C3.21416 20.25 2.95316 20.0875 2.827 19.831C2.70243 19.5777 2.73071 19.2763 2.89944 19.0508L2.90074 19.0489C2.90465 19.0433 2.91399 19.0295 2.92801 19.007C2.95605 18.9621 3.00293 18.882 3.06272 18.7616C3.18228 18.521 3.35395 18.1185 3.52978 17.5133C3.8816 16.3021 4.25001 14.279 4.25001 11.119C4.25001 6.87222 7.53677 3.18086 11.75 2.78508V1.25C11.75 0.835786 12.0858 0.5 12.5 0.5ZM12.5 4.25C8.79679 4.25 5.75001 7.4163 5.75001 11.119C5.75001 14.3937 5.36841 16.561 4.97023 17.9317C4.87927 18.2448 4.78745 18.5164 4.69912 18.75H20.2195C20.1577 18.5908 20.0955 18.4138 20.0341 18.2173C19.6292 16.921 19.25 14.7445 19.25 11.119C19.25 7.3877 16.2361 4.25 12.5 4.25ZM10.2888 21.5304C10.6862 21.4137 11.103 21.6413 11.2196 22.0387C11.3838 22.5979 11.9198 22.9992 12.5025 22.9992C13.0852 22.9992 13.6212 22.5979 13.7854 22.0387C13.902 21.6413 14.3188 21.4137 14.7163 21.5304C15.1137 21.647 15.3413 22.0638 15.2246 22.4613C14.873 23.6591 13.7509 24.4992 12.5025 24.4992C11.2541 24.4992 10.132 23.6591 9.78037 22.4613C9.6637 22.0638 9.89131 21.647 10.2888 21.5304Z"></path>
+                  </g>
 
+            </svg>
                   <li class="nav-item">
                       <a class="nav-link" href="{% url 'index' %}">Home</a>
                   </li>
@@ -207,6 +217,7 @@
                   <li class="nav-item">
                       <a class="nav-link" href="{% url 'create_listing' %}">Create Listing</a>
                   </li>
+
 
                   <li class="nav-item">
                       <a class="nav-link" href="{% url 'watchlist' %}">Watchlist</a>

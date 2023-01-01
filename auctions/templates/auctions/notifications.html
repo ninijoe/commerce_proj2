@@ -185,29 +185,31 @@ select {
 <div class="row mx-5" >
 
 {%if seller == user%}
+
+<br><br>
+<p style = "color: white;">Bids</p>
+{%for bids in all_bids reversed%}
+
+    <div class="alert alert-success" role="alert">{{ bids }}</div><br>
+
+{%endfor%}
+{%if not all_bids%}
+    <div class="alert alert-danger" role="alert">no bids yet. try reaching out more</div><br>
+    <p style = "color: white; font-size: 30px;">did you know you can make the best of your listing by plugging your website, amazon or ebay product image url to your boxx when <a href="{% url 'create_listing' %}" style = "color: lightblue;">creating a listing?</a></p>
+
+{%endif%}
+<br>
   <p style = "color: white;">Comments</p>
   {%for comments in all_comments reversed%}
 
       <div class="alert alert-info" role="alert">{{ comments }} &nbsp;"{{comments.comment}}"</div><br>
 
   {%endfor%}
-  {%if not comments%}
+  {%if not all_comments%}
   <div class="alert alert-danger" role="alert">no comments yet. try discovering other users</div><br>
 
   {%endif%}
-  <br><br>
-  <p style = "color: white;">Bids</p>
-  {%for bids in all_bids reversed%}
 
-      <div class="alert alert-success" role="alert">{{ bids }}</div><br>
-
-  {%endfor%}
-  {%if not bids%}
-      <div class="alert alert-danger" role="alert">no bids yet. try reaching out more</div><br>
-      <p style = "color: white; font-size: 30px;">did you know you can make the best of your listing by plugging your amazon or ebay product image url to your boxx when <a href="{% url 'create_listing' %}" style = "color: lightblue;">creating a listing</a>.</p>
-
-  {%endif%}
-  <br>
 
 {%endif%}
 
