@@ -99,7 +99,7 @@ class Bid(models.Model):
     auction_listing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE, blank=True, related_name="listing", default=None)
 
     def __str__(self):
-        return f" {self.bidder} made a bid of {self.bid} on {self.auction_listing} "
+        return f" {self.bidder} made a bid of ${self.bid} on {self.auction_listing} "
 
 
 

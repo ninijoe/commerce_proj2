@@ -180,16 +180,20 @@ select {
 
 
 
-<h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">Notifications</h2><br>
-<br>
-<div class="row mx-7" >
+<h2 class="" style="color: white; justify-content: left; text-align: left; font-size: 4rem;">Notifications</h2><br>
+
+<div class="row mx-5" >
 
 {%if seller == user%}
+  {%for comments in all_comments%}
+      <div class="alert alert-info" role="alert">{{ comments }} &nbsp;"{{comments.comment}}"</div><br>
+  {%endfor%}
+  <br>
 
-
-      <div class="alert alert-success" role="alert">{{ all_comments }}</div>
-      <div class="alert alert-success" role="alert">{{ all_bids }}</div>
-
+  {%for bids in all_bids%}
+      <div class="alert alert-success" role="alert">{{ bids }}</div><br>
+  {%endfor%}
+  <br>
 
 {%endif%}
 

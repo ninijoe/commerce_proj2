@@ -30,7 +30,11 @@ def notifications(request):
         seller = listing.seller_id
         all_comments = Comment.objects.filter(auction_listing = listing )
         all_bids = Bid.objects.filter(auction_listing = listing)
-    return render(request, 'auctions/notifications.html', {'all_comments': all_comments , 'all_bids': all_bids ,'seller': seller})
+
+        message = {'all_comments': all_comments,'all_bids': all_bids, 'seller': seller}
+
+
+    return render(request, 'auctions/notifications.html', message)
 
 
 
