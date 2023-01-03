@@ -162,7 +162,7 @@ def close_listing(request, listing_id):
 @login_required(login_url='login')
 def delete_listing(request, listing_id):
     if request.method == 'POST':
-        user = request.
+        user = request.user
         listing = AuctionListing.objects.get(pk=listing_id)
         listing.delete()
         listings = AuctionListing.objects.filter(seller_id = user)
