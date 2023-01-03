@@ -162,22 +162,12 @@ def close_listing(request, listing_id):
 @login_required(login_url='login')
 def delete_listing(request, listing_id):
     if request.method == 'POST':
-        listings = AuctionListing.objects.all()
-        user = request.user
-        for listing in listings:
+        user = request.
+        listing = AuctionListing.objects.get(pk=listing_id)
+        listing.delete()
+        listings = AuctionListing.objects.filter(seller_id = user)
+        return render(request, 'auctions/me.html', {'messages': "Listing successfully deleted ", 'listings': listings})
 
-            if listing == listings.get(pk=listing_id):
-
-                listing.delete()
-                return render(request, 'auctions/me.html', {'messages': "Listing deleted "})
-            else:
-                context = {
-
-                    'messages': messages.success(request, "Listing deleted "),
-
-                }
-
-    return render(request, 'auctions/me.html', context)
 
 
 

@@ -180,10 +180,10 @@ select {
 
 
 {% if messages %}
-  {% for message in messages %}
-  <div class="alert alert-success" role="alert">{{ message }}</div>
 
-  {% endfor %}
+  <div class="alert alert-success" role="alert">{{ messages }}</div>
+
+
 {% endif %}
 
 <h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">My Box</h2><br>
@@ -191,7 +191,7 @@ select {
 <div class="row mx-7" >
 {%for listing in listings reversed %}
 {%if seller == user%}
-{{context}}
+
 <div class="card mx-3" >
 
   <form class="listing" action="{% url 'listing' listing.id %}" method="get">
