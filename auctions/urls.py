@@ -23,4 +23,6 @@ urlpatterns = [
     path("sellers", views.sellers, name='sellers'),
     path("settings", views.settings, name='settings'),
     path("notifications", views.notifications, name='notifications'),
+    path("delete_listing/<int:listing_id>", views.delete_listing, name='delete_listing'),
+
 ]
