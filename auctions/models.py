@@ -29,17 +29,16 @@ class Category(models.Model):
 
 
 
+
 class AuctionListing(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    image_one = models.ImageField(upload_to='auctions/images/' ,  blank = True  )
-    image_two = models.ImageField(upload_to='auctions/images/' ,  blank = True   )
-    image_three = models.ImageField(upload_to='auctions/images/' ,  blank = True  )
+    imageUrl = models.CharField(max_length=1000)
     startingBid = models.DecimalField(max_digits=10, decimal_places=2)
     isActive= models.BooleanField(default=True)
     category= models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, related_name="category")
     watchlist = models.ManyToManyField(User, blank = True, related_name= "watchlist" )
-    seller_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False, default=None , related_name="seller")
+    seller_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False, related_name="seller")
     created = models.DateTimeField(default = timezone.now)
 
     def __str__(self):
@@ -52,7 +51,7 @@ class AuctionListing(models.Model):
         return self.description
 
     def get_listing_image(self):
-        return self.image_one
+        return self.imageUrl
 
     def get_listing_startingBid(self):
         return self.startingBid
@@ -65,11 +64,11 @@ class AuctionListing(models.Model):
         return self.category
 
     def get_listing_watchlist(self):
-        return self.watchlist
+        return f"{self.seller_id}'s watchlist "
 
 
     def get_listing_seller_id(self):
-        return self.seller_id
+        return f" {self.title} posted by {self.seller_id} "
 
 
     def created(self):
@@ -82,7 +81,7 @@ class AuctionListing(models.Model):
 class AuctionListingForm(forms.ModelForm):
     class Meta:
         model = AuctionListing
-        fields = ['title', 'description', 'image_one', 'image_two', 'image_three', 'startingBid', 'isActive', 'category']
+        fields = ['title', 'description', 'imageUrl', 'startingBid', 'isActive', 'category']
 
 
 
@@ -100,7 +99,7 @@ class Bid(models.Model):
     auction_listing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE, blank=True, related_name="listing", default=None)
 
     def __str__(self):
-        return f" {self.bidder} made a bid of {self.bid} on {self.auction_listing} "
+        return f" {self.bidder} made a bid of ${self.bid} on {self.auction_listing} "
 
 
 
@@ -130,4 +129,4 @@ class Comment(models.Model):
 
 
     def __str__(self):
-        return f" on {self.created}, {self.author} dropped a comment on {self.auction_listing} "
+        return f"{self.author} dropped a comment on {self.auction_listing} "
