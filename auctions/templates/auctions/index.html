@@ -131,9 +131,9 @@ select {
     }
 
     input[type="submit"][name="listing"] {
-        background-color: red;
+        background-color: lightblue;
         border: none;
-        color: white;
+        color: black;
         padding: 10px 20px;
         text-align: center;
         text-decoration: none;
@@ -143,6 +143,7 @@ select {
 
     input[type="submit"][name="listing"]:hover{
         background-color: red;
+        color: white;
 
     }
 
@@ -201,7 +202,7 @@ select {
 {% endif %}
 
 <h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">All Listings</h2><br>
-<form style="text-align: center; margin-top: 50px;" method="get" action="https://www.google.com/search">
+<form style="text-align: center; margin-top: 50px;" method="get" action="https://www.google.com/search/">
     <input type="text" name="q" class="searchbar" placeholder="search listings" style = "color: grey;">
 
 </form>
@@ -226,7 +227,7 @@ select {
         <br>
         <p class="card-text" style="font-size:0.8rem;color:white; font-weight: bold; ">{{listing.description}}</p>
 
-        <input type="submit" name="listing" style="border-radius:2em;" value="view">
+        <input type="submit" name="listing" style="border-radius:2em; " value="view">
       </div>
     </div>
   </form>
