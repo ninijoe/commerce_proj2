@@ -160,6 +160,21 @@ select {
 
     }
 
+    .searchbar{
+      display: flex;
+      position: absolute;
+      z-index: 3;
+      height: 44px;
+      background: white;
+      border: 3px solid #dfe1e5;
+      box-shadow: none;
+      border-radius: 24px;
+      margin: 0 auto;
+      width: 584px;
+      margin-top: -70px;
+      margin-left: 16px;
+      margin-bottom: 20px;
+    }
 
 
 
@@ -186,8 +201,13 @@ select {
 {% endif %}
 
 <h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">All Listings</h2><br>
+<form style="text-align: center; margin-top: 50px;" method="get" action="https://www.google.com/search">
+    <input type="text" name="q" class="searchbar" placeholder="search listings" style = "color: grey;">
+
+</form>
+
 <br>
-<div class="row mx-7" >
+<div class="row mx-3" >
 {%for listing in listings reversed %}
 {%if seller_id == user%}
 <div class="card mx-3" >
