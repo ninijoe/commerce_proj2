@@ -61,10 +61,7 @@ def notifications(request):
         all_comments = Comment.objects.filter(auction_listing = listing )
         all_bids = Bid.objects.filter(auction_listing = listing)
 
-        message = {'all_comments': all_comments,'all_bids': all_bids, 'seller': seller}
-
-
-    return render(request, 'auctions/notifications.html', message)
+    return render(request, 'auctions/notifications.html', {'all_comments': all_comments,'all_bids': all_bids, 'seller': seller})
 
 
 
@@ -364,8 +361,10 @@ def category_listings_search(request):
 
     if not matches:
         messages.error(request, "No result")
+        return render(request, "auctions/index.html", messages)
+    else:
+        return render(request, "auctions/category_listing.html", file)
 
-        return render(request, "auctions/me.html", messages)
 
 
 
