@@ -26,6 +26,32 @@ def index(request):
     return render(request, 'auctions/index.html', {'listings': listings, 'seller_id': seller_id , 'user': user})
 
 
+
+def index_search(request):
+    searchquery= request.GET['q']
+    user = request.user
+    listings = AuctionListing.objects.filter(title = searchquery)
+    file= {"listings": listings  }
+    matches= []
+
+    if listings:
+        return render(request, "auctions/index.html", file )
+
+    else:
+        listings = AuctionListing.objects.all()
+        for listing in listings:
+            if searchquery.lower() in listing.title.lower():
+                matches.append(listing)
+            file = {"listings": matches}
+        return render(request, "auctions/index.html", file)
+
+        if not matches:
+            
+            return render(request, "auctions/index.html")
+
+
+
+
 def notifications(request):
     user = request.user
     listings = AuctionListing.objects.filter(seller_id = user)
@@ -51,9 +77,41 @@ def me(request):
 
 
 
+def me_search(request):
+    return
+
+
+
+
+
+
 def categories(request):
     categories = Category.objects.all()
     return render(request, 'auctions/categories.html', {'categories': categories})
+
+
+def categories_search(request):
+    searchquery= request.GET['q']
+    user = request.user
+    categories = Category.objects.filter(categoryName = searchquery)
+    file= {"categories": categories  }
+    matches= []
+
+    if categories:
+        return render(request, "auctions/categories.html", file )
+
+    else:
+        categories = Category.objects.all()
+        for category in categories:
+            if searchquery.lower() in category.categoryName.lower():
+                matches.append(category)
+            file = {"categories": matches}
+        return render(request, "auctions/categories.html", file)
+
+        if not matches:
+            return render(request, "auctions/categories.html")
+
+
 
 
 
@@ -71,6 +129,8 @@ def sellers(request):
             'all_users': users
         }
         return render(request, 'auctions/sellers.html', context)
+
+
 
 
 
@@ -272,6 +332,28 @@ def category_listings(request, category_id):
 
 
 
+def category_listings_search(request):
+    searchquery= request.GET['q']
+    user = request.user
+    listings = AuctionListing.objects.filter(title = searchquery)
+    file= {"listings": listings  }
+    matches= []
+
+    if listings:
+        return render(request, "auctions/category_listings.html", file )
+
+    else:
+        listings = AuctionListing.objects.all()
+        for listing in listings:
+            if searchquery.lower() in listing.title.lower():
+                matches.append(listing)
+            file = {"listings": matches}
+        return render(request, "auctions/category_listings.html", file)
+
+        if not matches:
+            return render(request, "auctions/category_listings.html")
+
+
 
 
 
@@ -289,7 +371,8 @@ def watchlist(request):
     return render(request, 'auctions/watchlist.html', context)
 
 
-
+def watchlist_search(request):
+    return
 
 
 

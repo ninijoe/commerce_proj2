@@ -188,8 +188,8 @@ select {
 {% endif %}
 
 <h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">My Box</h2><br>
-<form style="text-align: center; margin-top: 50px;" method="get" action="https://www.google.com/search">
-    <input type="text" name="q" class="searchbar" placeholder="search my box" style = "color: grey;">
+<form style="text-align: center; margin-top: 50px;" method="get" action="{% url 'me_search' %}">
+    <input type="text" name="q" class="searchbar" placeholder="search my box" style = "color: black;">
 
 </form>
 <style media="screen">

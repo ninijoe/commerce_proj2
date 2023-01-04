@@ -201,16 +201,16 @@ select {
   {% endfor %}
 {% endif %}
 
+
 <h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">All Listings</h2><br>
-<form style="text-align: center; margin-top: 50px;" method="get" action="https://www.google.com/search/">
-    <input type="text" name="q" class="searchbar" placeholder="search listings" style = "color: grey;">
+
+<form style="text-align: center; margin-top: 50px;" method="get" action="{% url 'index_search' %}">
+    <input type="text" name="q" class="searchbar" placeholder="search listings" style = "color: black;">
 
 </form>
-
-<br>
+<br><br>
 <div class="row mx-3" >
-{%for listing in listings reversed %}
-{%if seller_id == user%}
+{%for listing in listings reversed%}
 <div class="card mx-3" >
 
   <form class="listing" action="{% url 'listing' listing.id %}" method="get">
@@ -233,12 +233,10 @@ select {
   </form>
 
 </div>
+{%endfor%}
 
-
-
-{%endif%}
-{% endfor %}
 </div>
+
 
 
 

@@ -24,5 +24,10 @@ urlpatterns = [
     path("settings", views.settings, name='settings'),
     path("notifications", views.notifications, name='notifications'),
     path("delete_listing/<int:listing_id>", views.delete_listing, name='delete_listing'),
+    path("index_search", views.index_search, name='index_search'),
+    path("categories_search", views.categories_search, name='categories_search'),
+    path("watchlist_search", views.watchlist_search, name='watchlist_search'),
+    path("me_search", views.me_search, name='me_search'),
+    path("category_listings_search", views.category_listings_search, name='category_listings_search'),
 
 ]
