@@ -46,8 +46,9 @@ def index_search(request):
         return render(request, "auctions/index.html", file)
 
         if not matches:
-            
-            return render(request, "auctions/index.html")
+            messages.error(request, "No result")
+
+            return render(request, "auctions/index.html", messages)
 
 
 
@@ -78,7 +79,23 @@ def me(request):
 
 
 def me_search(request):
-    return
+    searchquery= request.GET['q']
+    user = request.user
+    listings = AuctionListing.objects.filter(seller_id = user)
+    file= {"listings": listings  }
+    matches= []
+
+    for listing in listings:
+        if searchquery.lower() in listing.title.lower():
+            matches.append(listing)
+        file = {"listings": matches}
+    return render(request, "auctions/me.html", file)
+
+    if not matches:
+        messages.error(request, "No result")
+
+        return render(request, "auctions/me.html", messages)
+
 
 
 
@@ -339,19 +356,16 @@ def category_listings_search(request):
     file= {"listings": listings  }
     matches= []
 
-    if listings:
-        return render(request, "auctions/category_listings.html", file )
+    for listing in listings:
+        if searchquery.lower() in listing.title.lower():
+            matches.append(listing)
+        file = {"listings": matches}
+    return render(request, "auctions/category_listings.html", file)
 
-    else:
-        listings = AuctionListing.objects.all()
-        for listing in listings:
-            if searchquery.lower() in listing.title.lower():
-                matches.append(listing)
-            file = {"listings": matches}
-        return render(request, "auctions/category_listings.html", file)
+    if not matches:
+        messages.error(request, "No result")
 
-        if not matches:
-            return render(request, "auctions/category_listings.html")
+        return render(request, "auctions/me.html", messages)
 
 
 
@@ -372,7 +386,28 @@ def watchlist(request):
 
 
 def watchlist_search(request):
-    return
+    searchquery= request.GET['q']
+    user = request.user
+    listings = AuctionListing.objects.filter(title = searchquery)
+    file= {"listings": listings  }
+    matches= []
+
+    if listings:
+        return render(request, "auctions/watchlist.html", file )
+
+    else:
+        listings = AuctionListing.objects.all()
+        for listing in listings:
+            if searchquery.lower() in listing.title.lower():
+                matches.append(listing)
+            file = {"listings": matches}
+        return render(request, "auctions/watchlist.html", file)
+
+        if not matches:
+            messages.error(request, "No result")
+
+            return render(request, "auctions/watchlist.html", messages)
+
 
 
 

@@ -192,6 +192,7 @@ select {
     <input type="text" name="q" class="searchbar" placeholder="search my box" style = "color: black;">
 
 </form>
+<br>
 <style media="screen">
   .searchbar{
     display: flex;
@@ -212,7 +213,7 @@ select {
 <br>
 <div class="row mx-7" >
 {%for listing in listings reversed %}
-{%if seller == user%}
+{%if seller_id == user%}
 
 <div class="card mx-3" >
 

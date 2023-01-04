@@ -187,10 +187,7 @@ select {
 {% endif %}
 
 <h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">{{category.categoryName}}</h2><br>
-<form style="text-align: center; margin-top: 50px;" method="get" action="{% url 'category_listings_search' %}">
-    <input type="text" name="q" class="searchbar" placeholder="search {{category.categoryName}}" style = "color: black;">
 
-</form>
 <style media="screen">
   .searchbar{
     display: flex;
@@ -208,6 +205,11 @@ select {
     margin-bottom: 20px;
   }
 </style>
+<form style="text-align: center; margin-top: 50px;" method="get" action="{% url 'category_listings_search' %}">
+
+    <input type="text" name="q" class="searchbar" placeholder="search {{category.categoryName}}" style = "color: black;">
+
+</form>
 <br>
 <div class="row mx-7" >
 {%for listing in listings reversed %}
