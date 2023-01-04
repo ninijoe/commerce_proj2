@@ -305,7 +305,7 @@ def add_to_watchlist(request , listing_id ):
     user = request.user
     listing.watchlist.add(user)
     messages.error(request, "Listing was successfully added to watchlist")
-    return HttpResponseRedirect(reverse("listing" , args=(listing_id, )))
+    return HttpResponseRedirect(reverse("index" ))
 
 
 
