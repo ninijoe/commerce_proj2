@@ -161,7 +161,12 @@ select {
 
     }
 
-
+    .profile-info{
+      display: inline-block;
+      margin-left: 450px;
+      text-align: right;
+      justify-content: right;
+    }
 
 
 
@@ -186,6 +191,21 @@ select {
 
 
 {% endif %}
+
+<section style ="background-color :black; padding: 30px;">
+  <div class="activity-AbstractUser">
+    <img type="file" class= "card-img-top" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d29tYW4lMjBzbWlsaW5nfGVufDB8fDB8fA%3D%3D&w=1000&q=80" alt="imageurl" style ="width:430px; height:465px; border-radius: 10px; margin: 0 auto;">
+    <div class="profile-info">
+      <h4 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">@{{user.username}}</h4>
+      <a href="mailto:{{user.email}}"><p style="color: lightblue; justify-content: left; margin-left: 20px; font-size: 2rem;">{{user.email}}</p> </a>
+      <hr style = "color: white;">
+      <h4 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 2rem;">I want to sell and connect with as many people as possible</h4>
+
+    </div>
+  </div>
+</section>
+
+<br><br>
 
 <h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">My Box</h2><br>
 <form style="text-align: center; margin-top: 50px;" method="get" action="{% url 'me_search' %}">

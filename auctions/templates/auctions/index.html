@@ -187,7 +187,7 @@ select {
 <br>
 {% if not user.is_authenticated %}
 <h4 style="color:white;">
-  AuctionBoxx helps you discover buyers and sellers like craigslist. You can post items and services for auction, final sale or advertisement. You need to create an account to access this site's functionalities.
+  AuctionBoxx connects you to buyers and sellers in your community. You can post items and services for auction, final sale or advertisement. You need to create an account to access this site's functionalities.
    See <a href="{%url 'about'%}" style="color: pink;">more</a>
 </h4>
 {%endif%}
@@ -203,7 +203,7 @@ select {
 <h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">All Listings</h2><br>
 
 <form style="text-align: center; margin-top: 50px;" method="get" action="{% url 'index_search' %}">
-    <input type="text" name="q" class="searchbar" placeholder="search listings" style = "color: black;">
+    <input type="text" name="q" class="searchbar" placeholder="search listings" style = "color: black; ">
 
 </form>
 <br><br>
