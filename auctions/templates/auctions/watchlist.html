@@ -182,28 +182,7 @@ select {
 {% endif %}
 
 <h2 class="" style="color: white; justify-content: left; margin-left: 20px; font-size: 4rem;">Watchlist</h2><br>
-<form style="text-align: center; margin-top: 50px;" method="get" action="{% url 'watchlist_search' %}">
-    <input type="text" name="q" class="searchbar" placeholder="search watchlist" style = "color: black;">
 
-</form>
-<br>
-<style media="screen">
-  .searchbar{
-    display: flex;
-    position: absolute;
-    z-index: 3;
-    height: 44px;
-    background: white;
-    border: 3px solid #dfe1e5;
-    box-shadow: none;
-    border-radius: 24px;
-    margin: 0 auto;
-    width: 584px;
-    margin-top: -70px;
-    margin-left: 16px;
-    margin-bottom: 20px;
-  }
-</style>
 <br>
 <div class="row mx-7" >
 {%for listing in listings reversed %}
@@ -223,7 +202,7 @@ select {
         <img type="file" class= "card-img-top" src="{{listing.imageUrl}}" alt="imageurl" style ="width:270px; height:315px; border-radius: 10px; margin: 0 auto;">
         <h5 class="card-title" style="font-weight:bold; color:white; font-size:">{{listing.title}}</h5>
         <p class="card-text" style="font-size:0.8rem;color:lightblue; font-weight: bold; ">{{listing.category}}</p>
-        <p class="card-text" style="font-size:1.0rem; color:lime;">${{listing.startingBid}}</p>
+        <p class="card-text" style="font-size:1.0rem; color:lime;">{{listing.startingBid}} CAD</p>
 
         <a href="{% url 'remove_from_watchlist' listing.id %}" style="position: absolute; top: 13; right: 0; "><i class="fas fa-times" style=" font-size: 60px; color: red;">x</i></a>
 

@@ -222,7 +222,7 @@ select {
       <img type="file" class= "card-img-top" src="{{listing.imageUrl}}" alt="imageurl" style ="width:270px; height:315px; border-radius: 10px; margin: 0 auto;">
       <h5 class="card-title" style="font-weight:bold; color:white; font-size:">{{listing.title}}</h5>
       <p class="card-text" style="font-size:0.8rem;color:lightblue; font-weight: bold; ">{{listing.category}}</p>
-      <p class="card-text" style="font-size:1.0rem; color:lime;">${{listing.startingBid}}</p>
+      <p class="card-text" style="font-size:1.0rem; color:lime;">{{listing.startingBid}} CAD</p>
 
       <a href="{% url 'add_to_watchlist' listing.id %}" style="position: absolute; top: 13; right: 0; "><i class="fas fa-times" style=" font-size: 60px; ">+</i></a>
 
@@ -249,7 +249,7 @@ select {
       <img type="file" class= "card-img-top" src="{{listing.imageUrl}}" alt="imageurl" style ="width:270px; height:315px; border-radius: 10px; margin: 0 auto;">
       <h5 class="card-title" style="font-weight:bold; color:white; font-size:">{{listing.title}}</h5>
       <p class="card-text" style="font-size:0.8rem;color:lightblue; font-weight: bold; ">{{listing.category}}</p>
-      <p class="card-text" style="font-size:1.0rem; color:lime;">${{listing.startingBid}}</p>
+      <p class="card-text" style="font-size:1.0rem; color:lime;">{{listing.startingBid}} CAD</p>
 
       <a href="{% url 'add_to_watchlist' listing.id %}" style="position: absolute; top: 13; right: 0; "><i class="fas fa-times" style=" font-size: 60px; ">+</i></a>
 

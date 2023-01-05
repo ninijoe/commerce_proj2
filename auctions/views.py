@@ -349,7 +349,7 @@ def category_listings(request, category_id):
 def category_listings_search(request):
     searchquery= request.GET['q']
     user = request.user
-    listings = AuctionListing.objects.filter(title = searchquery)
+    listings = AuctionListing.objects.all()
     file= {"listings": listings  }
     matches= []
 
@@ -361,7 +361,7 @@ def category_listings_search(request):
 
     if not matches:
         messages.error(request, "No result")
-        return render(request, "auctions/index.html", messages)
+        return render(request, "auctions/category_listings.html", messages)
     else:
         return render(request, "auctions/category_listing.html", file)
 
